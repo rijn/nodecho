@@ -9,6 +9,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/nodecho');
 
 var routes = require('./routes/index');
+var install = require('./routes/install');
 var posts = require('./routes/posts');
 
 var app = express();
@@ -26,6 +27,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/install', install);
 app.use(posts);
 
 // catch 404 and forward to error handler
