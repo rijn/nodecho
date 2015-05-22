@@ -11,6 +11,7 @@ mongoose.connect('mongodb://localhost/nodecho');
 var routes = require('./routes/index');
 var install = require('./routes/install');
 var posts = require('./routes/posts');
+var admin = require('./routes/admin');
 
 var app = express();
 
@@ -29,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/install', install);
 app.use(posts);
+
+app.use(admin);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

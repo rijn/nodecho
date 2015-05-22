@@ -1,0 +1,32 @@
+<% include header %>
+  	<main class="admin">
+  		<% include admin.nav.ejs %>
+  		<nav class="admin-inner-nav">
+			<a class="button button-normal" href="/admin/post/new">+ New</a>
+		</nav>
+		<table class="posts-table">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>TITLE</th>
+					<th>CREATE TIME</th>
+					<th>VIEWS</th>
+					<th>OPERATION</th>
+				</tr>
+			</thead>
+			<tbody>
+		<% posts.forEach(function(data){ %>
+			<tr class="posts-table-item">
+				<td><%= data.id %></td>
+				<td><%= data.title %></td>
+				<td><%= data.time %></td>
+				<td><%= data.views %></td>
+				<td>
+					<a href="<%= data.href %>">EDIT</a>
+				</td>
+			</tr>
+		<% }) %>
+			</tbody>
+		</table>
+  	</main>
+<% include footer %>
