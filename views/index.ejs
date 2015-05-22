@@ -1,0 +1,27 @@
+<% include header %>
+  	<main id="main">
+		<% excerpt.forEach(function(data){ %>
+			<article class="post">
+				<header class="post-header">
+					<h3 class="post-title">
+						<a class="post-title-link" href="<%= data.href %>">
+						<%= data.title %>
+						</a>
+					</h3>
+				</header>
+				<section class="post-excerpt">
+					<p>
+						<%- data.excerpt %>
+					</p>
+				</section>
+				<footer class="post-meta">
+					<%= data.keyword %>
+					<time class="post-date" datetime="<%= data.time %>"><%= new Date(data.time).toDateString() %></time></time>
+				</footer>
+			</article>
+		<% }) %>
+		<nav class="pagination" role="navigation">
+      <a class="button older-posts" href="/page/2/">Older Posts →</a>
+		</nav>
+  	</main>
+<% include footer %>

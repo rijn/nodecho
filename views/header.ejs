@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  	<header class="page-header <%=router.length?'active':''%>">
+  		<div class="inner">
+  			<a class="link" href="/"><%= title %></a>
+        <small>
+        <%
+          (router || []).forEach(
+            function(data) {
+        %>
+          &nbsp;&gt;&nbsp;<a class="link" href="<%=data.href || ''%>"><%=data.title || ''%></a>
+        <% }) %>
+        </small>
+  			<a class="button source-button">Source code on Github</a>
+  		</div>
+  	</header>
