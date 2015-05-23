@@ -28,7 +28,8 @@ router.get(/^(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, next) {
 
             data.forEach(
                 function(item) {
-                    item.excerpt = markdown.makeHtml(item.content);
+                    var end = item.content.indexOf('<!--more-->');
+                    item.excerpt = markdown.makeHtml(end < 0 ? item.content : item.content.substr(0, end));
                     item.href = "/post/" + item.id;
                 }
             );
