@@ -1,3 +1,4 @@
+var globals = require('../globals');
 var express = require('express');
 var router = express.Router();
 var markdown = require('markdown-js');
@@ -13,7 +14,7 @@ router.get('/post/:id', function(req, res, next) {
         };
     post.find(query).sort(sort).exec(function(err, data) {
         res.render('post', {
-            title: '「潮鳴」',
+            globals: globals,
             router: [{
                 title: data[0].title,
                 href: ""
@@ -25,8 +26,6 @@ router.get('/post/:id', function(req, res, next) {
                 time: data[0].time,
                 views: data[0].views + 1,
             }],
-            copyright: '&copy;&nbsp;Rijn, 2015.',
-            poweredby: 'Powered by Node.js',
         });
 
         /* count visitors */

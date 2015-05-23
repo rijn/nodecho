@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title><%= globals.blogname %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
   	<header class="page-header <%=router.length?'active':''%>">
   		<div class="inner">
-  			<a class="link" href="/"><img src="/images/logo.png" alt="<%= title %>" style="margin: 10px 0 -10px 0"/></a>
+  			<a class="link" href="/"><img src="/images/logo.png" alt="<%= globals.blogname %>" style="margin: 10px 0 -10px 0"/></a>
         <small>
         <%
           (router || []).forEach(

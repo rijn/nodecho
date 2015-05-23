@@ -1,3 +1,4 @@
+var globals = require('../globals');
 var express = require('express');
 var markdown = require('markdown-js');
 var router = express.Router();
@@ -33,10 +34,8 @@ router.get(/^(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, next) {
             );
             if (data.length > pagePost) {};
             res.render('index', {
-                title: '「潮鳴」',
+                globals: globals,
                 router: [],
-                copyright: '&copy;&nbsp;Rijn, 2015.',
-                poweredby: 'Powered by Node.js',
                 excerpt: data,
                 newer: skip - 1,
                 older: skip < Math.ceil(count / pagePost) - 1 ? Number(skip) + 1 : 0,

@@ -1,3 +1,4 @@
+var globals = require('../globals');
 var express = require('express');
 var markdown = require('markdown-js');
 var router = express.Router();
@@ -17,7 +18,7 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
             }
         );
         res.render('admin.posts.edit.ejs', {
-            title: '「潮鳴」',
+            globals: globals,
             router: [{
                 title: "ADMIN",
                 url: "/admin",
@@ -28,8 +29,6 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
                 title: data[0].title,
                 url: "",
             }],
-            copyright: '&copy;&nbsp;Rijn, 2015.',
-            poweredby: 'Powered by Node.js',
             notification: "Saved successfully",
             posts: data,
         });
@@ -41,7 +40,7 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
     switch (req.params[0]) {
         case "dashboard":
             res.render('admin.dashboard.ejs', {
-                title: '「潮鳴」',
+                globals: globals,
                 router: [{
                     title: "ADMIN",
                     url: "",
@@ -49,8 +48,6 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                     title: "DASHBOARD",
                     url: "",
                 }],
-                copyright: '&copy;&nbsp;Rijn, 2015.',
-                poweredby: 'Powered by Node.js',
             });
             break;
         case "posts":
@@ -66,7 +63,7 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                         }
                     );
                     res.render('admin.posts.edit.ejs', {
-                        title: '「潮鳴」',
+                        globals: globals,
                         router: [{
                             title: "ADMIN",
                             url: "/admin",
@@ -77,8 +74,6 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                             title: data[0].title,
                             url: "",
                         }],
-                        copyright: '&copy;&nbsp;Rijn, 2015.',
-                        poweredby: 'Powered by Node.js',
                         notification: null,
                         posts: data,
                     });
@@ -95,7 +90,7 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                         }
                     );
                     res.render('admin.posts.ejs', {
-                        title: '「潮鳴」',
+                        globals: globals,
                         router: [{
                             title: "ADMIN",
                             url: "",
@@ -103,8 +98,6 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                             title: "POSTS",
                             url: "",
                         }],
-                        copyright: '&copy;&nbsp;Rijn, 2015.',
-                        poweredby: 'Powered by Node.js',
                         posts: data,
                     });
                 });
