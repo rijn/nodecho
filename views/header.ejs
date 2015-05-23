@@ -7,13 +7,13 @@
   <body>
   	<header class="page-header <%=router.length?'active':''%>">
   		<div class="inner">
-  			<a class="link" href="/"><%= title %></a>
+  			<a class="link" href="/"><img src="/images/logo.png" alt="<%= title %>" style="margin: 10px 0 -10px 0"/></a>
         <small>
         <%
           (router || []).forEach(
             function(data) {
         %>
-          &nbsp;&gt;&nbsp;<a class="link" href="<%=data.href || ''%>"><%=data.title || ''%></a>
+          &nbsp;&middot;&nbsp;<a class="link" href="<%=data.href || ''%>"><%=data.title || ''%></a>
         <% }) %>
         </small>
   			<a class="button source-button">Source code on Github</a>

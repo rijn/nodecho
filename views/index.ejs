@@ -21,7 +21,12 @@
 			</article>
 		<% }) %>
 		<nav class="pagination" role="navigation">
-      <a class="button older-posts" href="/page/2/">Older Posts →</a>
+			<% if(newer > -1) { %>
+				<a class="button newer-posts" href="/<%= newer %>">← Newer Posts</a>
+			<% } %>
+			<% if(older > 0) { %>
+      		<a class="button older-posts" href="/<%= older %>">Older Posts →</a>
+      		<% } %>
 		</nav>
   	</main>
 <% include footer %>

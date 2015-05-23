@@ -489,6 +489,10 @@ a.link{
     transition: all 0.2s ease;
 }
 
+.newer-posts {
+    left: 0;
+}
+
 .older-posts {
     right: 0;
 }
