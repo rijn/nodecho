@@ -29,6 +29,7 @@ router.get('/post/:id', function(req, res, next) {
             poweredby: 'Powered by Node.js',
         });
 
+        /* count visitors */
         post.update(query, {
             $set: {
                 views: (data[0].views + 1)
