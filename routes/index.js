@@ -6,7 +6,7 @@ var post = require('../models/posts').post;
 
 /* GET home page. */
 router.get(/^(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, next) {
-    var pagePost = 10,
+    var blogPages = globals.blogPages,
         query = {},
         sort = {
             time: -1
@@ -16,14 +16,14 @@ router.get(/^(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, next) {
     post.find(query).count(function(err, count) {
         if (err) return handleError(err);
 
-        if (skip > Math.ceil(count / pagePost) - 1) {
-            skip = Math.ceil(count / pagePost) - 1;
+        if (skip > Math.ceil(count / blogPages) - 1) {
+            skip = Math.ceil(count / blogPages) - 1;
         }
 
         console.log('skip = ', skip);
         console.log('count = ', count);
 
-        post.find(query).sort(sort).skip(skip * pagePost).limit(pagePost).exec(function(err, data) {
+        post.find(query).sort(sort).skip(skip * blogPages).limit(blogPages).exec(function(err, data) {
             if (err) return handleError(err);
 
             data.forEach(
@@ -32,13 +32,13 @@ router.get(/^(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, next) {
                     item.href = "/post/" + item.id;
                 }
             );
-            if (data.length > pagePost) {};
+            if (data.length > blogPages) {};
             res.render('index', {
                 globals: globals,
                 router: [],
                 excerpt: data,
                 newer: skip - 1,
-                older: skip < Math.ceil(count / pagePost) - 1 ? Number(skip) + 1 : 0,
+                older: skip < Math.ceil(count / blogPages) - 1 ? Number(skip) + 1 : 0,
             });
         });
     });

@@ -7,7 +7,12 @@
   <body>
   	<header class="page-header <%=router.length?'active':''%>">
   		<div class="inner">
-  			<a class="link" href="/"><img src="/images/logo.png" alt="<%= globals.blogname %>" style="margin: 10px 0 -10px 0"/></a>
+  			<a class="link" href="/">
+          <% if(!!globals.useLogo){ %>
+            <img src="/images/<%= globals.blogLogo %>" alt="<%= globals.blogName %>" style="margin: 10px 0 -10px 0"/></a>
+          <% } else { %>
+            <%= globals.blogName %>
+          <% } %>
         <small>
         <%
           (router || []).forEach(
@@ -16,6 +21,8 @@
           &nbsp;&middot;&nbsp;<a class="link" href="<%=data.href || ''%>"><%=data.title || ''%></a>
         <% }) %>
         </small>
-  			<a class="button source-button" href="https://github.com/rijn/nodecho">Source code on Github</a>
+        <% if(!!globals.subscribe) { %>
+  			<a class="button source-button" href="<%=globals.subscribeHref || ''%>"><%=globals.subscribeTitle || 'Subscribe'%></a>
+        <% } %>
   		</div>
   	</header>
