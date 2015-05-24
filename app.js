@@ -8,7 +8,7 @@ var markdown = require('markdown-js');
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/nodecho');
 
-var routes = require('./routes/index');
+var index = require('./routes/index');
 var install = require('./routes/install');
 var posts = require('./routes/posts');
 var admin = require('./routes/admin');
@@ -28,7 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/install', install);
-app.use(routes);
+app.use(index);
 app.use(posts);
 app.use(admin);
 
