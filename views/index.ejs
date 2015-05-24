@@ -15,8 +15,8 @@
 					</p>
 				</section>
 				<footer class="post-meta">
-					<%= data.keyword %>
-					<time class="post-date" datetime="<%= data.time %>"><%= new Date(data.time).toDateString() %></time></time>
+					<%= data.tags %>
+					<time class="post-date" datetime="<%= data.time %>"><%= new Date(Number(data.time)).toDateString() %></time></time>
 				</footer>
 			</article>
 		<% }) %>

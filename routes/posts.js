@@ -1,7 +1,7 @@
 var globals = require('../globals');
 var express = require('express');
 var router = express.Router();
-var markdown = require('markdown-js');
+var markdown = require( "markdown" ).markdown;
 var post = require('../models/posts').post;
 
 /* GET post content. */
@@ -21,8 +21,8 @@ router.get('/post/:id', function(req, res, next) {
             }],
             post: [{
                 title: data[0].title,
-                content: markdown.makeHtml(data[0].content),
-                keyword: data[0].keyword,
+                content: markdown.toHTML(data[0].content),
+                tags: data[0].tags,
                 time: data[0].time,
                 views: data[0].views + 1,
             }],

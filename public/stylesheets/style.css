@@ -199,7 +199,7 @@ input::-moz-focus-inner {
 
 textarea {
     overflow: auto;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 table {
@@ -345,7 +345,8 @@ a.link{
     outline: 0;
 }
 
-.control[type="submit"]{
+.control[type="submit"],
+.control[type="button"]{
     height: 40px;
     font-size: 0.6em;
 }
@@ -537,7 +538,6 @@ a.link{
 
 .posts-table-item {
     background: rgba(0,0,0,0);
-    cursor: pointer;
     transition: background ease 0.3s;
 }
 
@@ -546,5 +546,6 @@ a.link{
 }
 
 .posts-content{
-    font-size: 1.3rem;
+    line-height: 1.6em;
+    font-size: 0.8em;
 }

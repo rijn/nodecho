@@ -1,6 +1,6 @@
 var globals = require('../globals');
 var express = require('express');
-var markdown = require('markdown-js');
+var markdown = require( "markdown" ).markdown;
 var router = express.Router();
 var post = require('../models/posts').post;
 
@@ -30,7 +30,7 @@ router.get(/^(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, next) {
                 function(item) {
                     /* process <!--more--> tag */
                     var end = item.content.indexOf('<!--more-->');
-                    item.excerpt = markdown.makeHtml(end < 0 ? item.content : item.content.substr(0, end));
+                    item.excerpt = markdown.toHTML(end < 0 ? item.content : item.content.substr(0, end));
                     item.href = "/post/" + item.id;
                 }
             );

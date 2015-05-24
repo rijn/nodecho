@@ -6,37 +6,83 @@ var post = require('../models/posts').post;
 
 
 router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
-    console.log(req.param('title'));
-    var query = {id: req.params[0]},
+
+    var query = {
+            id: req.params[0]
+        },
         sort = {
             time: -1
         };
-    post.find(query).sort(sort).exec(function(err, data) {
-        data.forEach(
-            function(item) {
-                item.href = "/admin/posts/" + item.id;
+
+    var set = {
+        title: req.param('title') || '',
+        id: req.param('id') || req.params[0],
+        content: req.param('content') || '',
+        tags: req.param('tags') || '',
+    };
+
+    //set.content = set.content.replace(/\t/mg,"");
+    set.content = set.content.replace(/\r\n/mg,"\n");
+
+    console.log(set);
+
+    if (req.params[0] == 'new') {
+        post.count(function(err, count) {
+            if (set.id == 'new') {
+                set.id = Number(count) + 1;
             }
-        );
-        res.render('admin.posts.edit.ejs', {
-            globals: globals,
-            router: [{
-                title: "ADMIN",
-                url: "/admin",
-            }, {
-                title: "POSTS",
-                url: "/admin/posts",
-            }, {
-                title: data[0].title,
-                url: "",
-            }],
-            notification: "Saved successfully",
-            posts: data,
+            set.views = 0;
+            set.time = new Date().valueOf();
+
+            console.log(set);
+
+            post.create(set, function(err) {
+                if (err) return handleError(err);
+            });
         });
-    });
+    } else {
+
+        /* update post */
+        post.update(query, {
+            $set: set
+        }, function(err) {
+            if (err) return handleError(err);
+        });
+    }
+
+    var id = req.param('id') || req.params[0];
+
+    res.redirect('/admin/posts');
+
+    /*
+
+        post.find(query).sort(sort).exec(function(err, data) {
+            if (err) return handleError(err);
+            data.forEach(
+                function(item) {
+                    item.href = "/admin/posts/" + item.id;
+                }
+            );
+            res.render('admin.posts.edit.ejs', {
+                globals: globals,
+                router: [{
+                    title: "ADMIN",
+                    url: "/admin",
+                }, {
+                    title: "POSTS",
+                    url: "/admin/posts",
+                }, {
+                    title: data[0].title,
+                    url: "",
+                }],
+                notification: "Saved successfully",
+                posts: data,
+            });
+        });
+    */
 });
 
 router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, next) {
-    console.log(req.param('name'));
     switch (req.params[0]) {
         case "dashboard":
             res.render('admin.dashboard.ejs', {
@@ -52,16 +98,14 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
             break;
         case "posts":
             if (!!req.params[1]) {
-                var query = {id: req.params[1]},
+                var query = {
+                        id: req.params[1]
+                    },
                     sort = {
                         time: -1
                     };
-                post.find(query).sort(sort).exec(function(err, data) {
-                    data.forEach(
-                        function(item) {
-                            item.href = "/admin/posts/" + item.id;
-                        }
-                    );
+
+                if (!req.params[1] || req.params[1] == 'new') {
                     res.render('admin.posts.edit.ejs', {
                         globals: globals,
                         router: [{
@@ -71,13 +115,42 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                             title: "POSTS",
                             url: "/admin/posts",
                         }, {
-                            title: data[0].title,
+                            title: "NEW",
                             url: "",
                         }],
-                        notification: null,
-                        posts: data,
+                        notification: "",
+                        posts: [{
+                            id: "",
+                            title: "",
+                            content: "",
+                            tags: "",
+                        }],
                     });
-                });
+                } else {
+                    post.find(query).sort(sort).exec(function(err, data) {
+                        if (err) return handleError(err);
+                        data.forEach(
+                            function(item) {
+                                item.href = "/admin/posts/" + item.id;
+                            }
+                        );
+                        res.render('admin.posts.edit.ejs', {
+                            globals: globals,
+                            router: [{
+                                title: "ADMIN",
+                                url: "/admin",
+                            }, {
+                                title: "POSTS",
+                                url: "/admin/posts",
+                            }, {
+                                title: data[0].title,
+                                url: "",
+                            }],
+                            notification: null,
+                            posts: data,
+                        });
+                    });
+                }
             } else {
                 var query = {},
                     sort = {

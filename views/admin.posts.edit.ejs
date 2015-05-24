@@ -1,4 +1,7 @@
 <% include header %>
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/simditor.css" />
+
   	<main class="admin">
   		<% include admin.nav.ejs %>
   		<% if(!!notification){ %>
@@ -8,18 +11,40 @@
 	  	<% } %>
   		<form action="" method="post">
 	  		<div class="line" style="position:relative">
-	  			<input class="control button-normal" type="submit" value="SAVE" style="width:70px" />
+	  			<input class="control button-normal" type="submit" value="SAVE" id="submit" style="width:70px" />
 	  			<div class="line-clear" style="position:absolute;left:75px;right:0;margin-top:1px;padding-right:17px">
 					<input class="control" type="text" name="title" value="<%= posts[0].title %>" style="width:100%"/>
 				</div>
 			</div>
+	  		<div class="line" style="position:relative;overflow:hidden">
+	  			<input class="control button-normal" type="button" value="ID" style="width:70px" />
+	  			<div class="line-clear" style="position:absolute;left:75px;right:0;margin-top:1px;padding-right:17px">
+					<input class="control" type="text" name="id" value="<%= posts[0].id %>" style="width:100%"/>
+				</div>
+			</div>
+	  		<div class="line" style="position:relative;overflow:hidden">
+	  			<input class="control button-normal" type="button" value="TAGS" style="width:70px" />
+	  			<div class="line-clear" style="position:absolute;left:75px;right:0;margin-top:1px;padding-right:17px">
+					<input class="control" type="text" name="tags" value="<%= posts[0].tags %>" style="width:100%"/>
+				</div>
+			</div>
 			<div class="line" style="position:relative">
-				<div class="line-clear" style="display:block;padding:0 17px 0 75px;">
-					<textarea class="control posts-content" type="textarea" rows="20" style="width:100%">
+				<div class="line-clear" style="display:block;padding:0 0 0 75px;">
+					<textarea id="editor" type="textarea" name="content" rows="40" style="width:100%;font-size:0.7em" autofocus><%= posts[0].content %></textarea>
+					<!--
+					<textarea class="control posts-content" id="editor" type="textarea" name="content" rows="20" style="width:100%">
 						<%= posts[0].content %>
 					</textarea>
+					-->
 				</div>
 			</div>
 		</form>
   	</main>
+
+<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+</script>
+
 <% include footer %>
