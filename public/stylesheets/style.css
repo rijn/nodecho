@@ -308,7 +308,7 @@ a:hover {
     color: #111;
 }
 
-a.link{
+a.link {
     color: #fff;
 }
 
@@ -346,16 +346,16 @@ a.link{
 }
 
 .control[type="submit"],
-.control[type="button"]{
+.control[type="button"] {
     height: 40px;
     font-size: 0.6em;
 }
 
-.control[type="textarea"]{
+.control[type="textarea"] {
     height: auto
 }
 
-.line{
+.line {
     width: 100%;
     padding: 0 0 5px 0;
     display: table;
@@ -363,12 +363,11 @@ a.link{
     clear: both;
 }
 
-.line > *{
+.line > * {
     display: inline-block;
     margin: 0 5px 0 0;
     vertical-align: middle;
 }
-
 /*General finished*/
 
 .page-header {
@@ -382,12 +381,11 @@ a.link{
     overflow: hidden;
     background-image: url(/images/background.jpg);
     color: #fff;
-
     transition: height ease 0.3s;
 }
 
-.page-header.active{
-	height: auto;
+.page-header.active {
+    height: auto;
 }
 
 .page-header > .inner {
@@ -458,7 +456,7 @@ a.link{
     white-space: nowrap;
 }
 
-.post-views{
+.post-views {
     display: inline-block;
     margin-left: 8px;
     padding-left: 12px;
@@ -466,6 +464,77 @@ a.link{
     text-transform: uppercase;
     font-size: 1.3rem;
     white-space: nowrap;
+}
+
+.post-markdown {
+    font-size: 0.8em;
+    line-height: 1.8em;
+}
+
+.post-markdown h1 {
+    font-size: 2em;
+    letter-spacing: -2px;
+    text-indent: -3px;
+}
+
+.post-markdown h2 {
+    font-size: 1.8em;
+    letter-spacing: -1px;
+}
+
+.post-markdown h3 {
+    font-size: 1.6em;
+}
+
+.post-markdown h4 {
+    font-size: 1.4em;
+}
+
+.post-markdown h5 {
+    font-size: 1.2em;
+}
+
+.post-markdown h6 {
+    font-size: 1em;
+}
+
+.post-markdown p {
+    font-size: 0.8em;
+}
+
+.post-markdown blockquote {
+    margin-left: -37px;
+    margin-right: 0;
+    padding-left: 30px;
+    border-left: solid 5px rgb(74,74,74)
+}
+
+.post-markdown hr {
+    border: 0;
+    border-top: solid 1px #EBF2F6;
+}
+
+.post-markdown code {
+    background: rgba(0,0,0,0.07);
+    padding: 0 4px;
+    border-radius: 3px
+}
+
+.post-markdown pre > code {
+    background: 0;
+    padding: 0;
+    margin: 0;
+    font-size: 0.8em;
+    line-height: 1em;
+    font-family: "Lucida Grande",sans-serif;
+}
+
+.post-markdown a {
+    color: rgb(0, 136, 204)
+}
+
+.post-markdown a:hover {
+    color: rgb(0, 100, 170)
 }
 
 .pagination {
@@ -522,30 +591,30 @@ a.link{
     padding: 0 50px;
 }
 
-.admin-nav{
+.admin-nav {
     padding: 0 0 30px 0;
 }
 
-.admin-inner-nav{
+.admin-inner-nav {
     padding: 0 0 30px 0;
 }
 
-.posts-table{
+.posts-table {
     width: 100%;
     font-size: 1.4rem;
     text-align: center;
 }
 
 .posts-table-item {
-    background: rgba(0,0,0,0);
+    background: rgba(0, 0, 0, 0);
     transition: background ease 0.3s;
 }
 
 .posts-table-item:hover {
-    background: rgba(0,0,0,0.05);
+    background: rgba(0, 0, 0, 0.05);
 }
 
-.posts-content{
+.posts-content {
     line-height: 1.6em;
     font-size: 0.8em;
 }

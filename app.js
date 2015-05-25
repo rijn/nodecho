@@ -6,7 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var markdown = require( "markdown" ).markdown;
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/nodecho');
+mongoose.connect('mongodb://@localhost/nodecho');
+//mongoose.connect('mongodb://nodecho_user:nodecho@localhost/nodecho');
 
 var index = require('./routes/index');
 var install = require('./routes/install');

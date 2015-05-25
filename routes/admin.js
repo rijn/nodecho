@@ -37,7 +37,7 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
             console.log(set);
 
             post.create(set, function(err) {
-                if (err) return handleError(err);
+                if (err) throw new Error(err);
             });
         });
     } else {
@@ -46,7 +46,7 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
         post.update(query, {
             $set: set
         }, function(err) {
-            if (err) return handleError(err);
+            if (err) throw new Error(err);
         });
     }
 
