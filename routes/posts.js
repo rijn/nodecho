@@ -18,35 +18,47 @@ function html_decode(str) {
 
 /* GET post content. */
 router.get('/post/:id', function(req, res, next) {
-    var query = {
-            id: req.params.id
-        },
-        sort = {
-            time: -1
-        };
-    post.find(query).sort(sort).exec(function(err, data) {
-        res.render('post', {
-            globals: globals,
-            router: [{
-                title: data[0].title,
-                href: ""
-            }],
-            post: [{
-                title: data[0].title,
-                content: html_decode(markdown.toHTML(data[0].content)),
-                tags: data[0].tags,
-                time: data[0].time,
-                views: data[0].views + 1,
-            }],
-        });
+    if (err) {
+        var err = new Error('Not Found');
+        err.status = 404;
+        next(err);
+    } else {
+        var query = {
+                id: req.params.id
+            },
+            sort = {
+                time: -1
+            };
+        post.find(query).sort(sort).exec(function(err, data) {
+            if (!data.length) {
+                var err = new Error('Not Found');
+                err.status = 404;
+                next(err);
+            } else {
+                res.render('post', {
+                    globals: globals,
+                    router: [{
+                        title: data[0].title,
+                        href: ""
+                    }],
+                    post: [{
+                        title: data[0].title,
+                        content: html_decode(markdown.toHTML(data[0].content)),
+                        tags: data[0].tags,
+                        time: data[0].time,
+                        views: data[0].views + 1,
+                    }],
+                });
 
-        /* count visitors */
-        post.update(query, {
-            $set: {
-                views: (data[0].views + 1)
+                /* count visitors */
+                post.update(query, {
+                    $set: {
+                        views: (data[0].views + 1)
+                    }
+                }, function(err) {});
             }
-        }, function(err) {});
-    });
+        });
+    }
 });
 
 module.exports = router;

@@ -24,8 +24,6 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
     //set.content = set.content.replace(/\t/mg,"");
     set.content = set.content.replace(/\r\n/mg,"\n");
 
-    console.log(set);
-
     if (req.params[0] == 'new') {
         post.count(function(err, count) {
             if (set.id == 'new') {
