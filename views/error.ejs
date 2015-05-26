@@ -1,3 +1,10 @@
-<h1><%= message %></h1>
-<h2><%= error.status %></h2>
-<pre><%= error.stack %></pre>
+<% include header %>
+  	<main id="main">
+			<article>
+				<h3><%= message %></h3>
+				<h4><%= error.status %></h4>
+				<small><%= error.stack %></small>
+			</article>
+  	</main>
+<% include footer %>
+
