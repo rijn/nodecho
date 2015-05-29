@@ -10,6 +10,8 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://@localhost/nodecho');
 //mongoose.connect('mongodb://nodecho_user:nodecho@localhost/nodecho');
 
+var cv = require('./routes/cv');
+
 var index = require('./routes/index');
 var install = require('./routes/install');
 var posts = require('./routes/posts');
@@ -30,6 +32,8 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cv);
 
 app.use('/install', install);
 app.use(index);
@@ -55,8 +59,8 @@ if (app.get('env') === 'development') {
             error: err,
             globals: globals,
             router: [{
-              title: "ERROR",
-              url: "",
+                title: "ERROR",
+                url: "",
             }],
         });
     });

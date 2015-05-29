@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rijn</title>
+    <link rel='stylesheet' href='/stylesheets/cv.css' />
+    <link rel='stylesheet' href='/stylesheets/font-awesome.css' />
+  </head>
+  <body>
+  	<header class="page-header">
+  		<nav class="navbar">
+        <div class="navbar-collapse">
+          <ul class="navbar-nav">
+<%
+nav.forEach(
+  function(data) {
+%>
+            <a class="navbar-item <%=data.active?'active':''%>" href="<%=data.link%>">
+              <%= data.title %>
+            </a>
+<%
+})
+%>
+          </ul>
+        </div>
+  		</nav>
+  	</header>

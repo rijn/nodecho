@@ -16,6 +16,7 @@ globals.subscribeHref = 'https://github.com/rijn/nodecho';
 /* Info shown at bottom of pages */
 globals.copyright = [
 	'&copy;&nbsp;Rijn, 2015&nbsp;',
+	'<a href="http://blog.pixelnf.com/">BLOG</a>',
 	'<a href="http://lab.pixelnfinite.com/">LAB</a>',
 	'<a href="https://github.com/rijn">GITHUB</a>',
 	'<a href="http://links.pixelnfinite.com/">LINKS</a>',
