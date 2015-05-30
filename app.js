@@ -7,8 +7,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var markdown = require("markdown").markdown;
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://@localhost/nodecho');
-//mongoose.connect('mongodb://nodecho_user:nodecho@localhost/nodecho');
+//mongoose.connect('mongodb://@localhost/nodecho');
+mongoose.connect('mongodb://nodecho_user:nodecho@localhost/nodecho');
 
 var cv = require('./routes/cv');
 
@@ -51,6 +51,7 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
+/*
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
@@ -65,6 +66,7 @@ if (app.get('env') === 'development') {
         });
     });
 }
+*/
 
 // production error handler
 // no stacktraces leaked to user
@@ -74,7 +76,10 @@ app.use(function(err, req, res, next) {
         message: err.message,
         error: {},
         globals: globals,
-        router: [],
+        router: [{
+            title: "ERROR",
+            url: "",
+        }],
     });
 });
 

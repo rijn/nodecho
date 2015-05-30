@@ -1,10 +1,15 @@
 @charset "UTF-8";
+
 @font-face {
-    font-family: 'Source-Han-Light';
-    src: url('fonts/Source-Han-Light.eot');
-    src: url('fonts/Source-Han-Light.eot?#iefix') format('embedded-opentype'), url('fonts/Source-Han-Light.woff') format('woff'), url('fonts/Source-Han-Light.ttf') format('truetype'), url('fonts/Source-Han-Light.svg#Source-Han-Light') format('svg');
+    font-family: 'NotoSans-Regular';
+    src: url('fonts/NotoSans-Regular-webfont.eot');
+    src: url('fonts/NotoSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/NotoSans-Regular-webfont.woff') format('woff'),
+         url('fonts/NotoSans-Regular-webfont.ttf') format('truetype'),
+         url('fonts/NotoSans-Regular-webfont.svg#noto_sansregular') format('svg');
     font-weight: normal;
     font-style: normal;
+
 }
 
 article,
@@ -238,8 +243,7 @@ html {
 }
 
 body {
-    font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-    font-weight: 100;
+    font-family: 'NotoSans-Regular',"Lucida Grande", Helvetica, Arial, sans-serif;
     height: 100%;
     min-height: 100%;
     font-size: 2.2rem;
@@ -261,6 +265,7 @@ h3,
 h4,
 h5,
 h6 {
+    font-family: 'NotoSans-Regular';
     -webkit-font-feature-settings: 'dlig' 1, 'liga' 1, 'lnum' 1, 'kern' 1;
     -moz-font-feature-settings: 'dlig' 1, 'liga' 1, 'lnum' 1, 'kern' 1;
     -ms-font-feature-settings: 'dlig' 1, 'liga' 1, 'lnum' 1, 'kern' 1;
@@ -378,6 +383,8 @@ a.link {
 .page-header {
     position: relative;
     display: table;
+    z-index: 1;
+    background: #fff;
     width: 100%;
     overflow: hidden;
     transition: height ease 0.3s;
@@ -501,12 +508,14 @@ a.link {
 .container {
     padding-right: 15px;
     padding-left: 15px;
+    min-width: 600px;
     margin-right: auto;
     margin-left: auto;
     max-width: 780px;
 }
 
 .container-fluid {
+    min-width: 600px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -531,6 +540,14 @@ a.link {
     border-left: solid 1px #5c5d5f;
 }
 
+.timeline.fin > .item:last-child{
+    position: relative;
+    padding: 1.2rem 0 1.2rem 2rem;
+    margin: 0 2rem;
+    border-left: solid 1px #5c5d5f;
+    max-height: 10px
+}
+
 .timeline > .item:hover .node {
     background: #009a97;
     border-radius: 0;
@@ -553,7 +570,8 @@ a.link {
 }
 
 .timeline > .item > .title > .t1{
-    font-size: 0.85em;
+    font-size: 0.8em;
+    line-height: 1em;
     word-wrap: nowrap;
 }
 
@@ -564,12 +582,13 @@ a.link {
 
 .timeline > .item > .title > .t2{
     font-size: 0.55em;
-    padding: 0 0 0 1.5rem;
+    line-height: 1em;
+    padding: 0 0 0 1rem;
     color: #7c7d7f;
     word-wrap: nowrap;
 }
 
-.timeline > .item > .title > .detail{
+.timeline > .item > .title > .time{
     font-size: 0.5em;
     padding: 0 0 1rem 0;
     line-height: 1em;
@@ -586,7 +605,7 @@ a.link {
     padding: 0 20px;
     margin: 0;
     line-height: 2em;
-    font-size: 0.8em;
+    font-size: 0.7em;
     border-left: solid 0px #5c5d5f;
     transition: all ease 0.2s;
     -webkit-transition: all ease 0.2s;
@@ -624,7 +643,8 @@ a.link {
     padding: 0;
     width: 140px;
     height: 140px;
-    border-radius: 140px
+    border-radius: 140px;
+    border: solid 1px #fff;
 }
 
 .backpack .backpack-container .item:hover{

@@ -7,5 +7,7 @@ var postScheMa = new Schema({
     tags: String,
     time: String,
     views: Number,
+}, {
+    collection: 'posts',
 });
 exports.post = mongoose.model('posts', postScheMa); 

@@ -20,7 +20,7 @@ globals.copyright = [
 	'<a href="http://lab.pixelnfinite.com/">LAB</a>',
 	'<a href="https://github.com/rijn">GITHUB</a>',
 	'<a href="http://links.pixelnfinite.com/">LINKS</a>',
-	'<a href="http://cv.pixelnfinite.com/">CV</a>',
+	'<a href="http://cv.pixelnf.com/">CV</a>',
 ].join('&nbsp;&middot;&nbsp;');
 
 globals.poweredby = 'Powered by Node.js';
