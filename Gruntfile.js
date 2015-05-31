@@ -15,7 +15,14 @@ module.exports = function(grunt) {
                 files: {
                     'public/stylesheets/style.min.css': [
                         "public/stylesheets/style.css"
+                    ],
+                    'public/stylesheets/cv.min.css': [
+                        "public/stylesheets/cv.css"
+                    ],
+                    'public/stylesheets/font-awesome.min.css': [
+                        "public/stylesheets/font-awesome.css"
                     ]
+
                 }
             }
         }

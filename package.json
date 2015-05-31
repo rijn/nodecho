@@ -32,6 +32,7 @@
         "grunt-strip": "~0.2.1",
         "grunt-contrib-watch": "~0.6.0",
         "grunt-contrib-cssmin": "~0.5.0",
-        "graceful-fs": "*"
+        "graceful-fs": "*",
+        "inherits": "*"
     }
 }
