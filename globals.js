@@ -9,6 +9,12 @@ globals.blogName = '「潮鳴」';
 globals.blogLogo = 'logo.png';
 globals.useLogo = true;
 
+globals.db_name = "nodecho";
+
+globals.session_secret = "nodecho";
+globals.auth_cookie_name = "nodecho_user";
+
+
 globals.subscribe = true;
 globals.subscribeTitle = 'Source code on Github';
 globals.subscribeHref = 'https://github.com/rijn/nodecho';

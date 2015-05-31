@@ -7,14 +7,18 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var markdown = require("markdown").markdown;
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://@localhost/nodecho');
-mongoose.connect('mongodb://nodecho_user:nodecho@localhost/nodecho');
+var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
+
+mongoose.connect('mongodb://@localhost/nodecho');
+//mongoose.connect('mongodb://nodecho_user:nodecho@localhost/nodecho');
 
 var cv = require('./routes/cv');
 
 var index = require('./routes/index');
 var install = require('./routes/install');
 var posts = require('./routes/posts');
+var login = require('./routes/login');
 var admin = require('./routes/admin');
 
 var app = express();
@@ -30,14 +34,28 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
 app.use(cookieParser());
+app.use(session({
+    secret: globals.session_secret,
+    saveUninitialized: false,
+    resave: false,
+    store: new MongoStore({
+        db: globals.db_name,
+    }),
+}));
+app.use(require('./controllers/auth_cookie'));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(cv);
-
 app.use('/install', install);
+
+app.use('/login', login);
+
+app.use(cv);
 app.use(index);
 app.use(posts);
+
 app.use(admin);
 
 // catch 404 and forward to error handler
@@ -51,7 +69,6 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-/*
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
@@ -66,7 +83,7 @@ if (app.get('env') === 'development') {
         });
     });
 }
-*/
+
 
 // production error handler
 // no stacktraces leaked to user

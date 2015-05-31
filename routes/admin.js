@@ -7,6 +7,11 @@ var post = require('../models/posts').post;
 
 router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
 
+    if (!req.session || !req.session.user) {
+        res.redirect('/login');
+        return;
+    }
+
     var query = {
             id: req.params[0]
         },
@@ -81,6 +86,12 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
 });
 
 router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, next) {
+
+    if (!req.session || !req.session.user) {
+        res.redirect('/login');
+        return;
+    }
+
     switch (req.params[0]) {
         case "dashboard":
             res.render('admin.dashboard.ejs', {
