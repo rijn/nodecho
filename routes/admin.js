@@ -7,6 +7,8 @@ var post = require('../models/posts').post;
 
 router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
 
+    console.log(req.body);
+
     if (!req.session || !req.session.user) {
         res.redirect('/login');
         return;
@@ -19,12 +21,12 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
             time: -1
         };
 
-    var delete_post = req.param('delete'),
+    var delete_post = req.body["delete"],
         set = {
-            title: req.param('title') || '',
-            id: req.param('id') || req.params[0],
-            content: req.param('content') || '',
-            tags: req.param('tags').split(",") || [],
+            title: req.body['title'] || '',
+            id: req.body['id'] || req.params[0],
+            content: req.body['content'] || '',
+            tags: req.body['tags'].split(",") || [],
         };
 
     if (delete_post == "DELETE") {
@@ -40,7 +42,6 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
 
     } else {
 
-        //set.content = set.content.replace(/\t/mg,"");
         set.content = set.content.replace(/\r\n/mg, "\n");
 
         if (req.params[0] == 'new') {
@@ -67,7 +68,7 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
             });
         }
 
-        var id = req.param('id') || req.params[0];
+        var id = req.body['id'] || req.params[0];
 
         res.redirect('/admin/posts');
     }

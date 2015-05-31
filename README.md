@@ -7,9 +7,9 @@ Just a blog
 
 ## Environment
 
-* node `v0.12.2`
+* Node.js `v0.12.2`
 * npm `2.7.4`
-* forever
+* Mongo
 
 ## Quick start
 
@@ -28,7 +28,7 @@ cd nodecho && npm install
 3. Start server
 
 ```
-forever ./bin/www
+node ./bin/www
 ```
 
 ## Author

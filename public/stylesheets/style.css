@@ -2,13 +2,9 @@
 @font-face {
     font-family: 'NotoSans-Regular';
     src: url('fonts/NotoSans-Regular-webfont.eot');
-    src: url('fonts/NotoSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/NotoSans-Regular-webfont.woff') format('woff'),
-         url('fonts/NotoSans-Regular-webfont.ttf') format('truetype'),
-         url('fonts/NotoSans-Regular-webfont.svg#noto_sansregular') format('svg');
+    src: url('fonts/NotoSans-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/NotoSans-Regular-webfont.woff') format('woff'), url('fonts/NotoSans-Regular-webfont.ttf') format('truetype'), url('fonts/NotoSans-Regular-webfont.svg#noto_sansregular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 
 article,
@@ -317,6 +313,23 @@ a.link {
     color: #fff;
 }
 
+a.a-more {
+    background: #eee;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    transition: all ease-out 0.2s;
+    -webkit-transition: all ease-out 0.2s;
+    -moz-transition: all ease-out 0.2s;
+    -o-transition: all ease-out 0.2s;
+}
+
+a.a-more:hover {
+    background: rgb(0, 136, 204);
+    padding-left:10px;
+    color: #fff !important;
+}
+
 .button {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -471,16 +484,17 @@ a.link {
 .post-markdown h1 {
     font-size: 2em;
     letter-spacing: -2px;
-    text-indent: -3px;
+    text-indent: -1px;
 }
 
 .post-markdown h2 {
     font-size: 1.8em;
-    letter-spacing: -1px;
+    text-indent: -1px;
 }
 
 .post-markdown h3 {
     font-size: 1.6em;
+    text-indent: 0px;
 }
 
 .post-markdown h4 {
@@ -503,6 +517,8 @@ a.link {
     margin-left: -35px;
     margin-right: 0;
     padding-left: 30px;
+    font-style: italic;
+    font-family: "Lucida Grande", sans-serif;
     border-left: solid 5px rgb(74, 74, 74)
 }
 

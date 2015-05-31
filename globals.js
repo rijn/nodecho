@@ -9,24 +9,27 @@ globals.blogName = '「潮鳴」';
 globals.blogLogo = 'logo.png';
 globals.useLogo = true;
 
-globals.db_name = "nodecho";
+/* Manogodb name */
+globals.db = 'mongodb://@localhost/nodecho';
+//globals.db = 'mongodb://nodecho_user:nodecho@localhost/nodecho';
 
+/* Session key */
 globals.session_secret = "nodecho";
 globals.auth_cookie_name = "nodecho_user";
 
-
+/* Subscribe button */
 globals.subscribe = true;
 globals.subscribeTitle = 'Source code on Github';
 globals.subscribeHref = 'https://github.com/rijn/nodecho';
 
 /* Info shown at bottom of pages */
 globals.copyright = [
-	'&copy;&nbsp;Rijn, 2015&nbsp;',
-	'<a href="http://blog.pixelnf.com/">BLOG</a>',
-	'<a href="http://lab.pixelnfinite.com/">LAB</a>',
-	'<a href="https://github.com/rijn">GITHUB</a>',
-	'<a href="http://links.pixelnfinite.com/">LINKS</a>',
-	'<a href="http://cv.pixelnf.com/">CV</a>',
+    '&copy;&nbsp;Rijn, 2015&nbsp;',
+    '<a href="http://blog.pixelnf.com/">BLOG</a>',
+    '<a href="http://lab.pixelnfinite.com/">LAB</a>',
+    '<a href="https://github.com/rijn">GITHUB</a>',
+    '<a href="http://links.pixelnfinite.com/">LINKS</a>',
+    '<a href="http://cv.pixelnf.com/">CV</a>',
 ].join('&nbsp;&middot;&nbsp;');
 
 globals.poweredby = 'Powered by Node.js';

@@ -10,8 +10,8 @@ var mongoose = require('mongoose');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 
-mongoose.connect('mongodb://@localhost/nodecho');
-//mongoose.connect('mongodb://nodecho_user:nodecho@localhost/nodecho');
+//mongoose.connect('mongodb://@localhost/nodecho');
+mongoose.connect(globals.db);
 
 var cv = require('./routes/cv');
 
@@ -41,7 +41,7 @@ app.use(session({
     saveUninitialized: false,
     resave: false,
     store: new MongoStore({
-        db: globals.db_name,
+        url: globals.db,
     }),
 }));
 app.use(require('./controllers/auth_cookie'));
