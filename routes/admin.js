@@ -19,43 +19,58 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
             time: -1
         };
 
-    var set = {
-        title: req.param('title') || '',
-        id: req.param('id') || req.params[0],
-        content: req.param('content') || '',
-        tags: req.param('tags') || '',
-    };
+    var delete_post = req.param('delete'),
+        set = {
+            title: req.param('title') || '',
+            id: req.param('id') || req.params[0],
+            content: req.param('content') || '',
+            tags: req.param('tags').split(",") || [],
+        };
 
-    //set.content = set.content.replace(/\t/mg,"");
-    set.content = set.content.replace(/\r\n/mg,"\n");
-
-    if (req.params[0] == 'new') {
-        post.count(function(err, count) {
-            if (set.id == 'new') {
-                set.id = Number(count) + 1;
-            }
-            set.views = 0;
-            set.time = new Date().valueOf();
-
-            console.log(set);
-
-            post.create(set, function(err) {
-                if (err) throw new Error(err);
-            });
+    if (delete_post == "DELETE") {
+        /*delete post*/
+        post.remove(query).exec(function(err) {
+            if (!err) {
+                res.redirect('/admin/posts');
+            } else {
+                var err = new Error(err);
+                next(err);
+            };
         });
+
     } else {
 
-        /* update post */
-        post.update(query, {
-            $set: set
-        }, function(err) {
-            if (err) throw new Error(err);
-        });
+        //set.content = set.content.replace(/\t/mg,"");
+        set.content = set.content.replace(/\r\n/mg, "\n");
+
+        if (req.params[0] == 'new') {
+            post.count(function(err, count) {
+                if (set.id == 'new') {
+                    set.id = Number(count) + 1;
+                }
+                set.views = 0;
+                set.time = new Date().valueOf();
+
+                console.log(set);
+
+                post.create(set, function(err) {
+                    if (err) throw new Error(err);
+                });
+            });
+        } else {
+
+            /* update post */
+            post.update(query, {
+                $set: set
+            }, function(err) {
+                if (err) throw new Error(err);
+            });
+        }
+
+        var id = req.param('id') || req.params[0];
+
+        res.redirect('/admin/posts');
     }
-
-    var id = req.param('id') || req.params[0];
-
-    res.redirect('/admin/posts');
 
     /*
 
@@ -132,7 +147,7 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                             id: "",
                             title: "",
                             content: "",
-                            tags: "",
+                            tags: [],
                         }],
                     });
                 } else {

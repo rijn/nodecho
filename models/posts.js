@@ -4,7 +4,7 @@ var postScheMa = new Schema({
     id: String,
     title: String,
     content: String,
-    tags: String,
+    tags: Array,
     time: String,
     views: Number,
 }, {

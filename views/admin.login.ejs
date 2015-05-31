@@ -2,9 +2,11 @@
   	<main class="admin">
   		<% include admin.nav.ejs %>
   		<form action="" method="post">
-  			<input type="text" name="username" />
-  			<input type="password" name="password" />
-  			<input type="submit" value="submit" />
+  			<input type="text" class="control" name="username" placeHolder="Username"/>
+  			</p>
+  			<input type="password" class="control" name="password" placeHolder="Password"/>
+  			</p>
+  			<input type="submit" class="control button button-normal" value="submit" />
   		</form>
   	</main>
 <% include footer %>
