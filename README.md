@@ -23,7 +23,7 @@ Just a blog
 
 * Set up mongodb
 
-`db.createCollection('nodecho');`
+`db.createCollection('posts');`
 
 * Start server
 
