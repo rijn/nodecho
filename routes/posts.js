@@ -46,6 +46,7 @@ router.get('/post/:id', function(req, res, next) {
                         content: html_decode(markdown.toHTML(data[0].content)),
                         tags: data[0].tags,
                         time: data[0].time,
+                        location: data[0].location,
                         views: data[0].views + 1,
                     }],
                 });

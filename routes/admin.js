@@ -27,6 +27,7 @@ router.post(/^\/admin\/posts\/([0-9A-Za-z-_]*)$/, function(req, res, next) {
             id: req.body['id'] || req.params[0],
             content: req.body['content'] || '',
             tags: req.body['tags'].split(",") || [],
+            location: req.body['location'] || '',
         };
 
     if (delete_post == "DELETE") {
@@ -149,6 +150,7 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                             title: "",
                             content: "",
                             tags: [],
+                            location: "",
                         }],
                     });
                 } else {

@@ -317,6 +317,23 @@ a.link {
     color: #fff;
 }
 
+a.a-more {
+    background: #eee;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 0.7em;
+    transition: all ease-out 0.2s;
+    -webkit-transition: all ease-out 0.2s;
+    -moz-transition: all ease-out 0.2s;
+    -o-transition: all ease-out 0.2s;
+}
+
+a.a-more:hover {
+    background: rgb(0, 136, 204);
+    padding-left:10px;
+    color: #fff !important;
+}
+
 .button {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

@@ -18,9 +18,10 @@
 						<%- data.content %>
 				</section>
 			</article>
-		<% }) %>
 		<nav class="pagination" role="navigation">
-      <a class="button older-posts" style="display:none">Share</a>
+			<span class="left"><i class="fa fa-map-marker"></i>&nbsp;&nbsp;<%= data.location %></span>
+      		<a class="button older-posts right" style="display:none">Share</a>
 		</nav>
+		<% }) %>
   	</main>
 <% include footer %>

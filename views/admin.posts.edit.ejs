@@ -28,6 +28,12 @@
 					<input class="control" type="text" name="tags" value="<%= posts[0].tags.join(",") %>" style="width:100%"/>
 				</div>
 			</div>
+	  		<div class="line" style="position:relative;overflow:hidden">
+	  			<input class="control " type="button" value="LOCATION" style="width:70px" />
+	  			<div class="line-clear" style="position:absolute;left:75px;right:0;margin-top:1px;padding-right:17px">
+					<input class="control" type="text" name="location" value="<%= posts[0].location %>" style="width:100%"/>
+				</div>
+			</div>
 			<div class="line" style="position:relative">
 				<div class="line-clear" style="display:block;padding:0 0 0 75px;">
 					<textarea id="editor" type="textarea" name="content" rows="40" style="width:100%;font-size:0.7em" autofocus><%= posts[0].content %></textarea>
@@ -43,11 +49,5 @@
 			</div>
 		</form>
   	</main>
-
-<script type="text/javascript" src="/javascripts/jquery.min.js"></script>
-
-<script type="text/javascript">
-
-</script>
 
 <% include footer %>

@@ -7,6 +7,7 @@ var postScheMa = new Schema({
     tags: Array,
     time: String,
     views: Number,
+    location: String,
 }, {
     collection: 'posts',
 });
