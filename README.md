@@ -14,15 +14,19 @@ Just a blog
 ## Quick start
 
 * Clone the repository
+
 `git clone https://github.com/rijn/nodecho.git`
 
 * Install package
+
 `cd nodecho && npm install`
 
 * Set up mongodb
+
 `db.createCollection('nodecho');`
 
 * Start server
+
 `node ./bin/www`
 
 ## Configuration
