@@ -13,23 +13,50 @@ Just a blog
 
 ## Quick start
 
-1. Clone the repository
+* Clone the repository
 
-```
-git clone https://github.com/rijn/nodecho.git
-```
+    git clone https://github.com/rijn/nodecho.git
 
-2. Install package
+* Install package
 
-```
-cd nodecho && npm install
-```
+    cd nodecho && npm install
 
-3. Start server
+* Set up mongodb
 
-```
-node ./bin/www
-```
+    db.createCollection('nodecho');
+
+* Start server
+
+    node ./bin/www
+
+## Configuration
+
+    /* Blogname shown at top of pages */
+    globals.blogName = '「潮鳴」';
+    globals.blogLogo = 'logo.png';
+    globals.useLogo = true;
+
+    /* Manogodb name */
+    globals.db = 'mongodb://@localhost/nodecho';
+
+    /* Session key */
+    globals.session_secret = "nodecho";
+    globals.auth_cookie_name = "nodecho_user";
+
+    /* Subscribe button */
+    globals.subscribe = true;
+    globals.subscribeTitle = 'Source code on Github';
+    globals.subscribeHref = 'https://github.com/rijn/nodecho';
+
+    /* Info shown at bottom of pages */
+    globals.copyright = [
+        '&copy;&nbsp;Rijn, 2015&nbsp;',
+    ].join('&nbsp;&middot;&nbsp;');
+
+    globals.poweredby = 'Powered by Node.js';
+
+    /* Blog pages show at most */
+    globals.blogPages = 10;
 
 ## Author
 
