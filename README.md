@@ -1,7 +1,7 @@
 # nodecho
 Just a blog
 
-## Offical blog
+## Author's blog
 
 [「潮鳴」](http://node.pixelnfinite.com/)
 
@@ -57,6 +57,7 @@ Just a blog
 
     /* Blog pages show at most */
     globals.blogPages = 10;
+    globals.enablePostpageBreadcrumb = false;
 
 ## Author
 
