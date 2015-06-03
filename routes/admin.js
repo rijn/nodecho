@@ -120,6 +120,7 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                     title: "DASHBOARD",
                     url: "",
                 }],
+                thinHeader: true,
             });
             break;
         case "posts":
@@ -144,6 +145,7 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                             title: "NEW",
                             url: "",
                         }],
+                        thinHeader: true,
                         notification: "",
                         posts: [{
                             id: "",
@@ -173,6 +175,7 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                                 title: data[0].title,
                                 url: "",
                             }],
+                            thinHeader: true,
                             notification: null,
                             posts: data,
                         });
@@ -198,6 +201,7 @@ router.get(/^\/admin\/([a-z]+)(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, ne
                             title: "POSTS",
                             url: "",
                         }],
+                        thinHeader: true,
                         posts: data,
                     });
                 });

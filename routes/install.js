@@ -6,12 +6,11 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('install', {
         globals: globals,
-        router: [
-        {
-        	title: "INSTALL",
-        	url: "",
-        }
-        ],
+        router: [{
+            title: "INSTALL",
+            url: "",
+        }],
+        thinHeader: true,
     });
 });
 

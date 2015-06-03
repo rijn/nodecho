@@ -27,22 +27,23 @@ router.get("/", function(req, res, next) {
             title: "LOGIN",
             url: "",
         }],
+        thinHeader: true,
     });
 });
 
 router.post("/", function(req, res, next) {
     var data = {
-            parament: req.param('username'),
-            password: req.param('password'),
-            route: 'checkLogin',
-        }
+        parament: req.param('username'),
+        password: req.param('password'),
+        route: 'checkLogin',
+    }
 
     if (data.parament == "rijn" && data.password == "abcd1995") {
         var user = {
-            'username': data.parament,
-            'password': data.password
-        }
-        //generate cookie
+                'username': data.parament,
+                'password': data.password
+            }
+            //generate cookie
         req.session.regenerate(function() {
             req.session.user = user.username;
             res.redirect('/admin/dashboard');

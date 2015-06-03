@@ -28,19 +28,25 @@ router.get('/post/:id', function(req, res, next) {
             },
             sort = {
                 time: -1
-            };
+            },
+            router = [];
+
         post.find(query).sort(sort).exec(function(err, data) {
             if (!data.length) {
                 var err = new Error('Not Found');
                 err.status = 404;
                 next(err);
             } else {
-                res.render('post', {
-                    globals: globals,
-                    router: [{
+                if (!!globals.enablePostpageBreadcrumb) {
+                    router = {
                         title: data[0].title,
                         href: ""
-                    }],
+                    }
+                }
+                res.render('post', {
+                    globals: globals,
+                    router: router,
+                    thinHeader: true,
                     post: [{
                         title: data[0].title,
                         content: html_decode(markdown.toHTML(data[0].content)),

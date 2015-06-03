@@ -32,6 +32,7 @@ router.get(/^(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, next) {
                 res.render('index', {
                     globals: globals,
                     router: [],
+                    thinHeader: false,
                     excerpt: [],
                     newer: skip - 1,
                     older: skip < Math.ceil(count / blogPages) - 1 ? Number(skip) + 1 : 0,
@@ -50,6 +51,7 @@ router.get(/^(?:[\/]*)([0-9A-Za-z-_]*)$/, function(req, res, next) {
                 res.render('index', {
                     globals: globals,
                     router: [],
+                    thinHeader: false,
                     excerpt: data,
                     newer: skip - 1,
                     older: skip < Math.ceil(count / blogPages) - 1 ? Number(skip) + 1 : 0,

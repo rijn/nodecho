@@ -6,7 +6,7 @@
     <link rel='stylesheet' href='/stylesheets/font-awesome.min.css' />
   </head>
   <body>
-  	<header class="page-header <%=router.length?'active':''%>">
+  	<header class="page-header <%= !!thinHeader ? 'active':''%>">
   		<div class="inner">
   			<a class="link" href="/">
           <% if(!!globals.useLogo){ %>

@@ -25,16 +25,17 @@ globals.subscribeHref = 'https://github.com/rijn/nodecho';
 /* Info shown at bottom of pages */
 globals.copyright = [
     '&copy;&nbsp;Rijn, 2015&nbsp;',
-    '<a href="http://blog.pixelnf.com/">BLOG</a>',
-    '<a href="http://lab.pixelnfinite.com/">LAB</a>',
+    '<a href="http://blog.rijnx.com/">BLOG</a>',
+    '<a href="http://lab.rijnx.com/">LAB</a>',
     '<a href="https://github.com/rijn">GITHUB</a>',
-    '<a href="http://links.pixelnfinite.com/">LINKS</a>',
-    '<a href="http://cv.pixelnf.com/">CV</a>',
+    '<a href="http://links.rijnx.com/">LINKS</a>',
+    '<a href="http://cv.rijnx.com/">CV</a>',
 ].join('&nbsp;&middot;&nbsp;');
 
-globals.poweredby = 'Powered by Node.js';
+globals.poweredby = '<a href="http://www.miitbeian.gov.cn/">苏ICP备15003700号</a>&nbsp;&middot;&nbsp;Powered by Node.js';
 
 /* Blog pages show at most */
 globals.blogPages = 10;
+globals.enablePostpageBreadcrumb = false;
 
 module.exports = globals;
