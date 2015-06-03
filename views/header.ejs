@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title><%= globals.blogName %></title>
+    <meta name="description" content="<%= globals.description  %>" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="initial-scale=1.0,user-scalable=no,maximum-scale=1" />
+    <link rel="shortcut icon" href="/favicon.ico">
     <link rel='stylesheet' href='/stylesheets/style.min.css' />
     <link rel='stylesheet' href='/stylesheets/font-awesome.min.css' />
   </head>
@@ -10,7 +17,7 @@
   		<div class="inner">
   			<a class="link" href="/">
           <% if(!!globals.useLogo){ %>
-            <img src="/images/<%= globals.blogLogo %>" alt="<%= globals.blogName %>" style="margin: 0px 0 -8px 0"/></a>
+            <img src="/images/<%= globals.blogLogo %>" alt="<%= globals.blogName %>" class="blog-logo" style="margin: 0px 0 -8px 0"/></a>
           <% } else { %>
             <%= globals.blogName %>
           <% } %>

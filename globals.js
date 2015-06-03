@@ -8,6 +8,7 @@ globals = {};
 globals.blogName = '「潮鳴」';
 globals.blogLogo = 'logo.png';
 globals.useLogo = true;
+globals.description = '';
 
 /* Manogodb name */
 globals.db = 'mongodb://@localhost/nodecho';
