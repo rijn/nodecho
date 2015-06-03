@@ -46,7 +46,12 @@ app.use(session({
 }));
 app.use(require('./controllers/auth_cookie'));
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+    maxAge: '5d',
+    setHeaders: function(res, path) {
+        res.set('x-timestamp', Date.now())
+    }
+}));
 
 app.use('/install', install);
 
