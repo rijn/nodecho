@@ -672,7 +672,8 @@ a.a-more:hover {
     }
     .post-markdown blockquote {
         margin-left: 0px;
-        padding-left: 10px;
+        margin-right: 15px;
+        padding-left: 15px;
         font-style: italic;
         font-family: "Lucida Grande", sans-serif;
         border-left: solid 5px rgb(74, 74, 74)
