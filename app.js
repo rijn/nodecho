@@ -15,6 +15,8 @@ mongoose.connect(globals.db);
 
 var cv = require('./routes/cv');
 
+var links = require('./routes/links');
+
 var index = require('./routes/index');
 var install = require('./routes/install');
 var posts = require('./routes/posts');
@@ -55,9 +57,16 @@ app.use(express.static(path.join(__dirname, 'public'), {
 
 app.use('/install', install);
 
+/* Router administrator page */
 app.use('/login', login);
 
+/* Router cv page */
 app.use(cv);
+
+/* Router links page */
+app.use(links);
+
+/* Router blog*/
 app.use(index);
 app.use(posts);
 

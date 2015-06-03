@@ -13,6 +13,9 @@ module.exports = function(grunt) {
         cssmin: {
             compress: {
                 files: {
+                    'public/stylesheets/n.min.css': [
+                        "public/stylesheets/n.css"
+                    ],
                     'public/stylesheets/style.min.css': [
                         "public/stylesheets/style.css"
                     ],
@@ -21,8 +24,10 @@ module.exports = function(grunt) {
                     ],
                     'public/stylesheets/font-awesome.min.css': [
                         "public/stylesheets/font-awesome.css"
+                    ],
+                    'public/stylesheets/links.min.css': [
+                        "public/stylesheets/links.css"
                     ]
-
                 }
             }
         }
