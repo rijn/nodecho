@@ -398,7 +398,7 @@ a.a-more:hover {
     background: #222 no-repeat center center;
     background-size: cover;
     overflow: hidden;
-    background-image: url(//blog.cdn.pixelnf.com/images/background.jpg);
+    background-image: url(/images/background.jpg);
     color: #fff;
     transition: height ease 0.3s;
 }
@@ -457,6 +457,15 @@ a.a-more:hover {
     hyphens: auto;
 }
 
+.post-index{
+    position: relative;
+    width: 80%;
+    max-width: 780px;
+    padding: 4rem auto;
+    word-break: break-word;
+    hyphens: auto;
+}
+
 .post-meta {
     display: block;
     margin: 2rem 0 0.6rem 0;
@@ -480,6 +489,10 @@ a.a-more:hover {
     margin: 2rem 0 0 0;
     font-size: 0.8em;
     line-height: 1.8em;
+}
+
+.post-markdown img{
+    width: 35%;
 }
 
 .post-markdown h1 {

@@ -321,7 +321,8 @@ a.a-more {
     background: #eee;
     padding: 2px 5px;
     border-radius: 3px;
-    font-size: 0.8em;
+    font-size:0.5em;
+    margin-left:10px;
     transition: all ease-out 0.2s;
     -webkit-transition: all ease-out 0.2s;
     -moz-transition: all ease-out 0.2s;

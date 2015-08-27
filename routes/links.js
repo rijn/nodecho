@@ -43,7 +43,40 @@ router.get("/", function(req, res, next) {
             type: "friend",
             href: "http://blog.tbis.me/",
             color: "green",
-        }];
+        }, {
+            title: "纯点菌~Mido",
+            description: "二次元症候群患者",
+            type: "friend",
+            href: "http://imoe.moe/",
+            color: "green",
+        }, {
+            title: "~ZEE~",
+            description: "绅士你好",
+            type: "friend",
+            href: "http://hentai.me/",
+            color: "green",
+        }, {
+            title: "钉子触",
+            description: "大触~大触~",
+            type: "friend",
+            href: "http://dimpurr.com/",
+            color: "green",
+        },{
+            title: "艾克斯の編碼者",
+            description: "機巧死月不會碼代碼",
+            type: "friend",
+            href: "http://xcoder.in/",
+            color: "green",
+        }
+        ,{
+            title: "YoungZhao's Blog",
+            description: "",
+            type: "friend",
+            href: "http://blog.xn--9p3a45o.cn/",
+            color: "green",
+        }
+
+        ];
         collapse.sort(function(a, b) {
             return a.title > b.title ? 1 : -1
         });
