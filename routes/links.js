@@ -75,6 +75,34 @@ router.get("/", function(req, res, next) {
             href: "http://blog.xn--9p3a45o.cn/",
             color: "green",
         }
+        ,{
+            title: "Perfect Freeze!",
+            description: "Cee Cirno",
+            type: "friend",
+            href: "http://blog.cee.moe/",
+            color: "green",
+        }
+        ,{
+            title: "Chinalover",
+            description: "Hack the world.",
+            type: "friend",
+            href: "http://blog.nuptzj.cn/",
+            color: "green",
+        }
+        ,{
+            title: "Wxy's",
+            description: "",
+            type: "friend",
+            href: "http://blog.wangxiyu.me",
+            color: "green",
+        }
+        ,{
+            title: "HorizonBlue",
+            description: "",
+            type: "friend",
+            href: "http://www.forestofhorizon.com/",
+            color: "green",
+        }
 
         ];
         collapse.sort(function(a, b) {

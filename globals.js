@@ -5,7 +5,7 @@
 globals = {};
 
 /* Blogname shown at top of pages */
-globals.blogName = '「潮鳴」';
+globals.blogName = '「秋桜」';
 globals.blogLogo = 'logo.png';
 globals.useLogo = true;
 globals.description = '';
@@ -25,7 +25,7 @@ globals.subscribeHref = 'https://github.com/rijn/nodecho';
 
 /* Info shown at bottom of pages */
 globals.copyright = [
-    '&copy;&nbsp;Rijn, 2015&nbsp;',
+    '&copy;&nbsp;Rijn, 2016&nbsp;',
     '<a href="http://blog.rijnx.com/">BLOG</a>',
     '<a href="http://lab.rijnx.com/">LAB</a>',
     '<a href="https://github.com/rijn">GITHUB</a>',

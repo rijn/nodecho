@@ -398,7 +398,8 @@ a.a-more:hover {
     background: #222 no-repeat center center;
     background-size: cover;
     overflow: hidden;
-    background-image: url(/images/background.jpg);
+    /* background-image: url(/images/background.jpg); */
+    background-image: url(/images/cat-sakura-road-japan.jpg);
     color: #fff;
     transition: height ease 0.3s;
 }
@@ -492,7 +493,7 @@ a.a-more:hover {
 }
 
 .post-markdown img{
-    width: 35%;
+    width: 100%;
 }
 
 .post-markdown h1 {
@@ -557,11 +558,13 @@ a.a-more:hover {
 }
 
 .post-markdown a {
-    color: rgb(0, 136, 204)
+    color: #eb8dc5;
+    /*color: rgb(0, 136, 204)*/
 }
 
 .post-markdown a:hover {
-    color: rgb(0, 100, 170)
+    color: #eb6ab7;
+    /*color: rgb(0, 100, 170)*/
 }
 
 .pagination {
