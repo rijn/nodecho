@@ -3,7 +3,7 @@ Just a blog
 
 ## Author's blog
 
-[「潮鳴」](http://node.pixelnfinite.com/)
+[「潮鳴」](http://blog.rijnx.com)
 
 ## Environment
 
