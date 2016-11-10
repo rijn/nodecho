@@ -11,8 +11,8 @@ globals.useLogo = true;
 globals.description = '';
 
 /* Manogodb name */
-globals.db = 'mongodb://@localhost/nodecho';
-//globals.db = 'mongodb://nodecho_user:nodecho@localhost/nodecho';
+// globals.db = 'mongodb://@localhost/nodecho';
+globals.db = 'mongodb://nodecho_user:nodecho@localhost/nodecho';
 
 /* Session key */
 globals.session_secret = "nodecho";

@@ -9,9 +9,9 @@
 						</span>
 					</h3>
 					<div class="post-meta">
-						<%= data.tags %>
+						<!--<%= data.tags %>-->
 						<time class="post-date" datetime="<%= data.time %>"><%= new Date(Number(data.time)).toDateString() %></time>
-						<span class="post-views"><%= data.views %> VIEWS</span>
+						<span class="post-views" style="display:none"><%= data.views %> VIEWS</span>
 					</div>
 				</header>
 				<section class="post-markdown">

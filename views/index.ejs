@@ -14,8 +14,8 @@
 						<%- data.excerpt %>
 					</p>
 				</section>
-				<footer class="post-meta">
-					<%= data.tags.join(",") %>
+				<footer class="post-meta" style="display:none">
+					<!--<%= data.tags.join(",") %>-->
 					<time class="post-date" datetime="<%= data.time %>"><%= new Date(Number(data.time)).toDateString() %></time></time>
 				</footer>
 			</article>
