@@ -62,7 +62,7 @@ app.use(history({
 
 if (args.indexOf('--vue') > -1) {
     console.log('Injecting Vue Middleware...');
-    require('./build/dev-middleware')(app);
+    require('../build/dev-middleware')(app);
 } else {
     app.use('/', express.static(path.join(__dirname, '../dist')));
 }
