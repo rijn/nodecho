@@ -76,9 +76,31 @@ if (args.indexOf('--livereload') > -1) {
 
 var port = process.env.PORT || 8080;
 
-var server = http.listen(port, function () {
-    var port = server.address().port;
-    console.log('Server is listening on ' + port);
-});
+const Q = require('q');
 
-module.exports = server;
+var db = require('./models');
+
+module.exports = Q
+    .fcall(() => {
+        var deferred = Q.defer();
+        db.sequelize
+            .authenticate()
+            .then(() => {
+                console.log('Connection has been established successfully.');
+                deferred.resolve({ db });
+            })
+            .catch(err => {
+                console.error(err);
+                deferred.resolve({ db });
+            });
+        return deferred.promise;
+    })
+    .then(({ db }) => {
+        var deferred = Q.defer();
+        var server = http.listen(port, () => {
+            var port = server.address().port;
+            console.log('Server is listening on ' + port);
+            deferred.resolve({ db, server });
+        });
+        return deferred.promise;
+    });
