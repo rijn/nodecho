@@ -1,7 +1,6 @@
 console.log('Running under NODE_ENV=' + process.env.NODE_ENV);
 
 var path = require('path');
-var loadRouter = require('./utils/router-loader');
 var express = require('express');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
@@ -40,7 +39,10 @@ app.use(function (req, res, next) {
     next();
 });
 
-loadRouter(app, path.join(__dirname, 'controllers'));
+require('./utils/router-loader')(app, path.join(__dirname, 'controllers'), {
+    constPrefix: '/api',
+    excludeRules: /get|post|put|delete/gi
+});
 
 app.use(function (req, res, next) {
     if (_.first(_.without(req.path.split('/'), '')) === 'api') {
@@ -98,7 +100,7 @@ module.exports = Q
     .then(({ db }) => {
         var deferred = Q.defer();
         db.sequelize
-            .sync({ force: false, logging: true })
+            .sync({ force: false, logging: false })
             .then(() => {
                 console.log('Sync successfully.');
                 deferred.resolve({ db });
