@@ -97,6 +97,20 @@ module.exports = Q
     })
     .then(({ db }) => {
         var deferred = Q.defer();
+        db.sequelize
+            .sync({ force: false, logging: true })
+            .then(() => {
+                console.log('Sync successfully.');
+                deferred.resolve({ db });
+            })
+            .catch(err => {
+                console.error(err);
+                deferred.resolve({ db });
+            });
+        return deferred.promise;
+    })
+    .then(({ db }) => {
+        var deferred = Q.defer();
         var server = http.listen(port, () => {
             var port = server.address().port;
             console.log('Server is listening on ' + port);
