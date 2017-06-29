@@ -15,12 +15,12 @@ function loadRouter (app, root, options) {
         const realRoot = os.platform() === 'win32' ? root.replace(/\\/ig, '/') : root;
         const filePath = file.replace(/\.[^.]*$/, '');
         const controller = require(filePath);
-        const constPrefix = '/api';
+        const constPrefix = opt.constPrefix || '/api';
         const urlPrefix = filePath.replace(realRoot, '').replace(/\/index$/, '');
         const methods = Object.keys(controller);
 
         // Handle options
-        const excludeRules = opt.excludeRules || [];
+        const excludeRules = opt.excludeRules || null;
         const rewriteRules = opt.rewriteRules || new Map();
 
         function applyMethod (name, methodBody) {
@@ -36,6 +36,7 @@ function loadRouter (app, root, options) {
                 params = body.params || [];
                 middlewares = body.middlewares || [];
                 modifiedUrl += `/${params.join('/')}`;
+                modifiedUrl = modifiedUrl.replace(/-/gi, ':');
                 handler = body.handler;
                 method = (body.method || 'get').toLowerCase();
                 break;
@@ -45,10 +46,12 @@ function loadRouter (app, root, options) {
             default: return;
             }
 
-            if (excludeRules.indexOf(modifiedUrl) !== -1) {
+            if (excludeRules && excludeRules.test(modifiedUrl)) {
             // Nothing to-do with the excluded rules
             } else if (METHOD_ENUM.indexOf(method) !== -1) {
                 if (!handler) throw Error('[express-load-router]: no handler for method: ', method);
+
+                if (process.env.NODE_ENV !== 'prod') console.log('[router-loader]: Register ' + modifiedUrl + ' - ' + method);
 
                 app[method](
                     rewriteRules.has(modifiedUrl)
