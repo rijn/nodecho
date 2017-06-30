@@ -1,4 +1,3 @@
-const _ = require('lodash');
 const Q = require('q');
 const models = require('../../models');
 const errorHandler = require('../../utils/error-handler');

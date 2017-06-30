@@ -1,9 +1,7 @@
-const _ = require('lodash');
 const Q = require('q');
 const models = require('../../../models');
 
 const errorHandler = require('../../../utils/error-handler');
-const pass = require('../../../utils/pass');
 const authority = require('../../../utils/authority');
 
 module.exports = (req, res) => {
@@ -23,7 +21,7 @@ module.exports = (req, res) => {
                     if (affectedRows) {
                         deferred.resolve(_s);
                     } else {
-                        deferred.reject('Tag id invalid', _s, 404)
+                        deferred.reject('Tag id invalid', _s, 404);
                     }
                 });
             return deferred.promise;

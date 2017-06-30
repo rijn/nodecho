@@ -1,6 +1,6 @@
 describe('post posts', function () {
-    let token = { };
-    before(() => { return dropAndRegisterAndLogin().then(_token => { token = _token; }) });
+    // let token = { };
+    // before(() => { return dropAndRegisterAndLogin().then(_token => { token = _token; }); });
 
     describe('should return Unauthorized 401', () => {
         xit('if did provide correct token', () => { });

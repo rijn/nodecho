@@ -16,7 +16,7 @@ module.exports = _s => {
             return models.Token
                 .findOne({
                     where: {
-                        token: data.token,
+                        token: data.token
                     },
                     include: [{
                         model: models.User,

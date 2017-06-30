@@ -1,6 +1,6 @@
 describe('tags', function () {
     let token = { };
-    before(() => { return dropAndRegisterAndLogin().then(_token => { token = _token; }) });
+    before(() => { return dropAndRegisterAndLogin().then(_token => { token = _token; }); });
 
     beforeEach(() => {
         return _db_.Tag
@@ -69,4 +69,6 @@ describe('tags', function () {
                 });
         });
     });
+
+    xit('should response Not Found 404 if delete a nonexist tag');
 });
