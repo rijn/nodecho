@@ -1,12 +1,13 @@
-var models = require('../../models');
-var Q = require('q');
-var _ = require('lodash');
-var errorHandler = require('../../utils/error-handler');
-var pass = require('../../utils/pass');
-var scrypt = require('scrypt');
-var random = require('../../utils/random');
+const _ = require('lodash');
+const Q = require('q');
+const models = require('../../models');
+const scrypt = require('scrypt');
 
-var schema = require('../../utils/orm-schema')(
+const errorHandler = require('../../utils/error-handler');
+const pass = require('../../utils/pass');
+const random = require('../../utils/random');
+
+const schema = require('../../utils/orm-schema')(
     models.User,
     ['salt', 'authority'], {}
 );
@@ -15,9 +16,8 @@ module.exports = (req, res) => {
     return Q
         .fcall(pass)
 
-        // examine input value
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             req.checkBody(schema);
             req.getValidationResult().then(result => {
                 if (!result.isEmpty()) {
@@ -31,9 +31,8 @@ module.exports = (req, res) => {
             return deferred.promise;
         })
 
-        // check if user exist
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             models.User
                 .findOne({
                     where: {
@@ -53,9 +52,8 @@ module.exports = (req, res) => {
             return deferred.promise;
         })
 
-        // encrypt password
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             _s.salt = random(16);
             scrypt
                 .kdf(_s.data.password + _s.salt, { N: 2, r: 1, p: 1 })
@@ -69,9 +67,8 @@ module.exports = (req, res) => {
             return deferred.promise;
         })
 
-        // insert into db
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             _s.assembly = _.assign(
                 _.pick(_s.data, _.keys(models.User.rawAttributes)),
                 {

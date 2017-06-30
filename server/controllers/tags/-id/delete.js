@@ -1,9 +1,10 @@
-var Q = require('q');
-var _ = require('lodash');
-var models = require('../../../models');
-var errorHandler = require('../../../utils/error-handler');
-var pass = require('../../../utils/pass');
-var authority = require('../../../utils/authority');
+const _ = require('lodash');
+const Q = require('q');
+const models = require('../../../models');
+
+const errorHandler = require('../../../utils/error-handler');
+const pass = require('../../../utils/pass');
+const authority = require('../../../utils/authority');
 
 module.exports = (req, res) => {
     return Q
@@ -11,7 +12,7 @@ module.exports = (req, res) => {
         .then(authority)
 
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             models.Tag
                 .destroy({
                     where: {

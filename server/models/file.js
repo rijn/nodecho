@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
     var File = sequelize.define('File', {
         key: {
             type: DataTypes.STRING(64),
@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
         paranoid: true
     });
 
-    File.associate = function (models) {
+    File.associate = models => {
         File.belongsTo(models.User);
     };
 

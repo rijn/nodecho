@@ -1,10 +1,11 @@
-var models = require('../../models');
-var Q = require('q');
-var _ = require('lodash');
-var errorHandler = require('../../utils/error-handler');
-var authority = require('../../utils/authority');
+const _ = require('lodash');
+const Q = require('q');
+const models = require('../../models');
 
-var schema = require('../../utils/orm-schema')(models.Tag, [], {});
+const errorHandler = require('../../utils/error-handler');
+const authority = require('../../utils/authority');
+
+const schema = require('../../utils/orm-schema')(models.Tag, [], {});
 
 module.exports = (req, res) => {
     return Q
@@ -12,7 +13,7 @@ module.exports = (req, res) => {
         .then(authority)
 
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             req.checkBody(schema);
             req.getValidationResult().then(result => {
                 if (!result.isEmpty()) {
@@ -27,7 +28,7 @@ module.exports = (req, res) => {
         })
 
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             _s.assembly = _.assign(
                 _.pick(_s.data, _.keys(models.Tag.rawAttributes)), {}
             );

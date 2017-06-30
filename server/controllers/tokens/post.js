@@ -1,11 +1,11 @@
-var _ = require('lodash');
-var Q = require('q');
-var scrypt = require('scrypt');
+const _ = require('lodash');
+const Q = require('q');
+const scrypt = require('scrypt');
 
-var models = require('../../models');
-var random = require('../../utils/random');
-var pass = require('../../utils/pass');
-var errorHandler = require('../../utils/error-handler');
+const models = require('../../models');
+const random = require('../../utils/random');
+const pass = require('../../utils/pass');
+const errorHandler = require('../../utils/error-handler');
 
 const schema = {
     'username': {
@@ -23,8 +23,8 @@ module.exports = (req, res) => {
         .fcall(pass)
 
         .then(_s => {
-            var deferred = Q.defer();
-            var data = _.extend(
+            let deferred = Q.defer();
+            let data = _.extend(
                 {
                     username: null,
                     password: null
@@ -35,7 +35,7 @@ module.exports = (req, res) => {
             return deferred.promise;
         })
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             req.checkBody(schema);
             req.getValidationResult().then(result => {
                 if (!result.isEmpty()) {
@@ -48,7 +48,7 @@ module.exports = (req, res) => {
         })
 
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             models.User
                 .findOne({
                     where: {
@@ -69,7 +69,7 @@ module.exports = (req, res) => {
         })
 
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             scrypt
                 .verifyKdf(Buffer.from(_s.user.password, 'base64'), _s.data.password + _s.user.salt)
                 .then(result => {
@@ -78,21 +78,21 @@ module.exports = (req, res) => {
                     } else {
                         deferred.reject(['Authority failed', _s, 401]);
                     }
-                }, function (err) {
+                }, err => {
                     deferred.reject([err, _s]);
                 });
             return deferred.promise;
         })
 
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             _s.token = random(32);
             deferred.resolve(_s);
             return deferred.promise;
         })
 
         .then(_s => {
-            var deferred = Q.defer();
+            let deferred = Q.defer();
             models.Token
                 .create({
                     token: _s.token,

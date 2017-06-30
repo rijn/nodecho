@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
     var Post = sequelize.define('Post', {
         title: {
             type: DataTypes.STRING,
@@ -23,7 +23,7 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 
-    Post.associate = function (models) {
+    Post.associate = models => {
         Post.belongsTo(models.User);
         Post.belongsToMany(models.Tag, {
             through: {
