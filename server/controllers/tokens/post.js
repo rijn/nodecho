@@ -76,7 +76,7 @@ module.exports = (req, res) => {
                     if (result) {
                         deferred.resolve(_s);
                     } else {
-                        deferred.reject(['Authority Failed', _s, 401]);
+                        deferred.reject(['Authority failed', _s, 401]);
                     }
                 }, function (err) {
                     deferred.reject([err, _s]);
@@ -92,6 +92,7 @@ module.exports = (req, res) => {
         })
 
         .then(_s => {
+            var deferred = Q.defer();
             _s.assembly = {
                 token: _s.token,
                 user: {

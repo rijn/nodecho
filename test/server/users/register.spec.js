@@ -44,15 +44,18 @@ describe('users register', function () {
         let userId;
 
         before((done) => {
-            request(_server_)
-                .post('/api/users')
-                .send(form)
-                .expect('Content-Type', /json/)
-                .expect(200)
-                .then(response => {
-                    assert(response.body.id !== '');
-                    userId = response.body.id;
-                    done();
+            _db_.User
+                .sync({ force: true })
+                .then(() => {
+                    request(_server_)
+                        .post('/api/users')
+                        .send(form)
+                        .expect(200)
+                        .then(response => {
+                            assert(response.body.id !== '');
+                            userId = response.body.id;
+                            done();
+                        });
                 });
         });
 

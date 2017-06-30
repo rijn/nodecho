@@ -9,7 +9,7 @@ module.exports = function (sequelize, DataTypes) {
             allowNull: false,
             validate: {
                 notEmpty: true,
-                is: ['^([a-zA-Z0-9]|[_]){4,16}$', 'gi']
+                is: ['^([a-zA-Z0-9]){32}$', 'gi']
             }
         }
     });
