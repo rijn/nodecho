@@ -28,8 +28,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             validate: {
                 notEmpty: true,
-                isEmail: true,
-                is: ['edu$', 'gi']
+                isEmail: true
             }
         },
         authority: {

@@ -3,7 +3,8 @@ module.exports = function (res) {
         try {
             obj[1].connection.release();
         } catch (e) {}
-        res.status(500).send({
+        if (process.env.NODE_ENV === 'dev') console.log(obj);
+        res.status(obj[2] || 400).send({
             'error': (obj[0] || '').toString()
         });
     };

@@ -54,6 +54,9 @@ module.exports = function (grunt) {
             },
             dev: {
                 NODE_ENV: 'dev'
+            },
+            test: {
+                NODE_ENV: 'test'
             }
         },
         express: {
@@ -93,6 +96,8 @@ module.exports = function (grunt) {
             }
         }
     });
+
+    require('./test/server/mocha.conf')(grunt);
 
     grunt.registerTask('build', [ 'clean', 'shell:build' ]);
 
