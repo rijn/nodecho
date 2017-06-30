@@ -9,7 +9,9 @@ global._ = require('lodash');
 global._server_ = null;
 global._db_ = null;
 
-before(function (done) {
+global._authorize_ = (token, data = {}) => { return _.assign(_.clone(data), token); };
+
+before(done => {
     require('../../../server')
         .then(({ db, server }) => {
             var deferred = Q.defer();

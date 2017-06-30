@@ -93,14 +93,11 @@ module.exports = (req, res) => {
 
         .then(_s => {
             var deferred = Q.defer();
-            _s.assembly = {
-                token: _s.token,
-                user: {
-                    id: _s.user.id
-                }
-            };
             models.Token
-                .create(_s.assembly)
+                .create({
+                    token: _s.token,
+                    user_id: _s.user.id
+                })
                 .then(() => {
                     deferred.resolve(_s);
                 });
@@ -108,6 +105,9 @@ module.exports = (req, res) => {
         })
 
         .done(_s => {
-            res.status(200).send(_.pick(_s, 'token'));
+            res.status(201).send({
+                userid: _s.user._id_,
+                token: _s.token
+            });
         }, errorHandler(res));
 };

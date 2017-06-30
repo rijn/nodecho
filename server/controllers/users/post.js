@@ -89,6 +89,6 @@ module.exports = (req, res) => {
         })
 
         .done(_s => {
-            res.status(200).send(_.pick(_s, 'id'));
+            res.status(201).send(_.pick(_s, 'id'));
         }, errorHandler(res));
 };
