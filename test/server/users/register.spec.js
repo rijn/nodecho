@@ -50,7 +50,7 @@ describe('users register', function () {
                     request(_server_)
                         .post('/api/users')
                         .send(form)
-                        .expect(200)
+                        .expect(201)
                         .then(response => {
                             assert(response.body.id !== '');
                             userId = response.body.id;
@@ -82,7 +82,7 @@ describe('users register', function () {
                     email: 'test2@test.edu'
                 }))
                 .expect('Content-Type', /json/)
-                .expect(200, done);
+                .expect(201, done);
         });
 
         it('if username exists', (done) => {
