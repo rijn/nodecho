@@ -1,31 +1,6 @@
 describe('tags', function () {
-    let form = {
-        username: 'test_user',
-        password: '123456',
-        email: 'test@test.edu'
-    };
-
     let token = { };
-
-    before(() => {
-        return _db_.User
-            .sync({ force: true })
-            .then(() => {
-                return request(_server_)
-                    .post('/api/users')
-                    .send(form)
-                    .expect(201);
-            })
-            .then(() => {
-                return request(_server_)
-                    .post('/api/tokens')
-                    .send(form)
-                    .expect(201)
-                    .then(response => {
-                        token = response.body;
-                    });
-            })
-    });
+    before(() => { return dropAndRegisterAndLogin().then(_token => { token = _token; }) });
 
     beforeEach(() => {
         return _db_.Tag
