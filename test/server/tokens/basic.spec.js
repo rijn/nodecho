@@ -12,7 +12,7 @@ describe('tokens', function () {
                 request(_server_)
                     .post('/api/users')
                     .send(form)
-                    .expect(200)
+                    .expect(201)
                     .then(() => {
                         done();
                     });
@@ -47,7 +47,7 @@ describe('tokens', function () {
         return request(_server_)
             .post('/api/tokens')
             .send(form)
-            .expect(200)
+            .expect(201)
             .then(response => {
                 assert(response.body.token.match(/^([a-zA-Z0-9]){32}$/));
             });

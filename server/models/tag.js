@@ -3,7 +3,9 @@
 module.exports = function (sequelize, DataTypes) {
     var Tag = sequelize.define('Tag', {
         name: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: { notEmpty: true }
         }
     }, {
         timestamps: false,

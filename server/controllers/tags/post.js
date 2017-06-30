@@ -2,13 +2,14 @@ var models = require('../../models');
 var Q = require('q');
 var _ = require('lodash');
 var errorHandler = require('../../utils/error-handler');
-var pass = require('../../utils/pass');
+var authority = require('../../utils/authority');
 
 var schema = require('../../utils/orm-schema')(models.Tag, [], {});
 
 module.exports = (req, res) => {
     return Q
-        .fcall(pass)
+        .fcall(() => { return { raw: req.body }; })
+        .then(authority)
 
         .then(_s => {
             var deferred = Q.defer();
