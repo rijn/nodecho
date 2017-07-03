@@ -1,6 +1,7 @@
-var Q = require('q');
-var models = require('../models');
-var idt = require('../utils/idt');
+const _ = require('lodash');
+const Q = require('q');
+const models = require('../models');
+const idt = require('../utils/idt');
 
 module.exports = _s => {
     var deferred = Q.defer();

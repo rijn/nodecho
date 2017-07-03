@@ -4,11 +4,18 @@ module.exports = (sequelize, DataTypes) => {
     var Post = sequelize.define('Post', {
         title: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: { notEmpty: true }
+        },
+        summary: {
+            type: DataTypes.TEXT,
+            allowNull: false,
+            validate: { notEmpty: true }
         },
         content: {
             type: DataTypes.TEXT,
-            allowNull: false
+            allowNull: false,
+            validate: { notEmpty: true }
         },
         location: {
             type: DataTypes.STRING
