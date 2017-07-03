@@ -70,28 +70,59 @@ describe('post posts', function () {
         });
     });
 
-    it('should return Created 201 if call post and success', () => {
-        return request(_server_)
-            .post('/api/posts')
-            .send(_authorize_(token, post))
-            .expect(201)
-            .then(response => {
-                let id = require('../../../server/utils/idt').decode('Post', response.body.id);
-                return _db_.Post
-                    .findOne({
-                        where: { id },
-                        include: [{
-                            model: _db_.Tag,
-                            through: {
-                                model: _db_.ItemTag
-                            }
-                        }, {
-                            model: _db_.User
-                        }]
-                    })
-                    .then(_post => {
-                        console.log(_post);
+    describe('if call post and success', () => {
+        let callPost = () => {
+            return request(_server_)
+                .post('/api/posts')
+                .send(_authorize_(token, post));
+        };
+
+        let fetchDb = (id) => {
+            return _db_.Post
+                .findOne({
+                    where: { id },
+                    include: [{
+                        model: _db_.Tag,
+                        through: {
+                            model: _db_.ItemTag
+                        }
+                    }, {
+                        model: _db_.User
+                    }]
+                })
+        };
+
+        it('should return Created 201', () => {
+            return callPost()
+                .expect(201);
+        })
+
+        describe('should save correct data into db', () => {
+            let data;
+
+            before(() => {
+                return callPost()
+                    .then(response => {
+                        let id = require('../../../server/utils/idt').decode('Post', response.body.id);
+                        return fetchDb(id)
+                            .then(post => {
+                                data = post;
+                            });
                     });
             });
+
+            it('post content', () => {
+                assert.deepStrictEqual(_.omit(post, 'tags'), _.pick(data.dataValues, _.keys(_.omit(post, 'tags'))));
+            });
+
+            it('user', () => {
+                assert(data.User.username === require('../helpers/authorize').userInfo.username);
+            });
+
+            it('tags', () => {
+                let _tags = _.map(tags, tag => tag.name);
+                _.each(data.Tags, Tag => { assert(_.includes(_tags, Tag.name)); })
+            })
+        })
     });
 });
