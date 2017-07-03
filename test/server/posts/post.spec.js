@@ -39,12 +39,35 @@ describe('post posts', function () {
     });
 
     describe('should return Unauthorized 401', () => {
-        xit('if did provide correct token', () => { });
+        it('if did provide correct token', () => {
+            return request(_server_)
+                .post('/api/posts')
+                .send(post)
+                .expect(401);
+        });
     });
 
     describe('should return BR 400', () => {
-        xit('if title is not valid', () => { });
-        xit('if content is not valid', () => { });
+        it('if title is not valid', () => {
+            return request(_server_)
+                .post('/api/posts')
+                .send(_authorize_(token, _.set(_.clone(post), 'title', null)))
+                .expect(400);
+        });
+
+        it('if summary is not valid', () => {
+            return request(_server_)
+                .post('/api/posts')
+                .send(_authorize_(token, _.set(_.clone(post), 'summary', null)))
+                .expect(400);
+        });
+
+        it('if content is not valid', () => {
+            return request(_server_)
+                .post('/api/posts')
+                .send(_authorize_(token, _.set(_.clone(post), 'content', null)))
+                .expect(400);
+        });
     });
 
     xit('should return Created 201 if call post and success', () => { });
