@@ -85,10 +85,12 @@ describe('post posts', function () {
                             through: {
                                 model: _db_.ItemTag
                             }
+                        }, {
+                            model: _db_.User
                         }]
                     })
-                    .then(post => {
-                        console.log(post);
+                    .then(_post => {
+                        console.log(_post);
                     });
             });
     });

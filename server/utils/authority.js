@@ -27,7 +27,7 @@ module.exports = _s => {
         })
         .then(token => {
             if (token) {
-                deferred.resolve(_.extend(_s, { token }));
+                deferred.resolve(_.extend(_s, { token, user_id: idt.decode('User', data.userid) }));
             } else {
                 deferred.reject(['Unauthorized', _s, 401]);
             }
