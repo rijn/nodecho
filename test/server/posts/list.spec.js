@@ -32,11 +32,13 @@ describe('list posts', function () {
         it('sort by date', () => {
             return request(_server_)
                 .get('/api/posts')
-                .send({ sort: 'created_at@desc' })
+                .query({ sort: 'created_at@DESC' })
                 .expect(200)
                 .then(response => {
-                    console.log(response.body);
-                    assert.deepEqual(response.body.map(post => post.title), posts.map(post => post.title));
+                    assert.deepEqual(
+                        response.body.map(post => post.title),
+                        posts.map(post => post.title).reverse()
+                    );
                 });
         });
     });
