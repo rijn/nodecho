@@ -20,7 +20,7 @@ function loadRouter (app, root, options) {
         const methods = Object.keys(controller);
 
         // Handle options
-        const excludeRules = opt.excludeRules || null;
+        // const excludeRules = opt.excludeRules || null;
         const rewriteRules = opt.rewriteRules || new Map();
 
         function applyMethod (name, methodBody) {
@@ -46,9 +46,7 @@ function loadRouter (app, root, options) {
             default: return;
             }
 
-            if (excludeRules && excludeRules.test(modifiedUrl)) {
-            // Nothing to-do with the excluded rules
-            } else if (METHOD_ENUM.indexOf(method) !== -1) {
+            if (METHOD_ENUM.indexOf(method) !== -1) {
                 if (!handler) throw Error('[express-load-router]: no handler for method: ', method);
 
                 if (process.env.NODE_ENV !== 'prod') console.log('[router-loader]: Register ' + modifiedUrl + ' - ' + method);
@@ -73,8 +71,8 @@ function loadRouter (app, root, options) {
                 methodBody.forEach((m) => {
                     applyMethod(methodName, m);
                 });
-            } else {
-                applyMethod(methodName, methodBody);
+            // } else {
+            //     applyMethod(methodName, methodBody);
             }
         });
     });

@@ -70,5 +70,26 @@ describe('post posts', function () {
         });
     });
 
-    xit('should return Created 201 if call post and success', () => { });
+    it('should return Created 201 if call post and success', () => {
+        return request(_server_)
+            .post('/api/posts')
+            .send(_authorize_(token, post))
+            .expect(201)
+            .then(response => {
+                let id = require('../../../server/utils/idt').decode('Post', response.body.id);
+                return _db_.Post
+                    .findOne({
+                        where: { id },
+                        include: [{
+                            model: _db_.Tag,
+                            through: {
+                                model: _db_.ItemTag
+                            }
+                        }]
+                    })
+                    .then(post => {
+                        console.log(post);
+                    });
+            });
+    });
 });

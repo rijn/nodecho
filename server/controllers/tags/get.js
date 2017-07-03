@@ -12,7 +12,7 @@ module.exports = (req, res) => {
             models.Tag
                 .all()
                 .then(projects => {
-                    _s.result = projects || [];
+                    _s.result = projects.dataValues || [];
                     deferred.resolve(_s);
                 });
             return deferred.promise;
