@@ -11,7 +11,7 @@ describe('list posts', function () {
         return []
             .concat([ () => { return _db_.Post.sync({ force: true }); } ])
             .concat(posts.map(post => {
-                return () => { return Q.delay(10).then(() => { _db_.Post.create(post); }); }
+                return () => { return Q.delay(10).then(() => { _db_.Post.create(post); }); };
             }))
             .reduce(Q.when, Q(null));
     });

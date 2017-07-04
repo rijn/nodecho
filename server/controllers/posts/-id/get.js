@@ -2,7 +2,6 @@ const _ = require('lodash');
 const Q = require('q');
 const models = require('../../../models');
 const errorHandler = require('../../../utils/error-handler');
-const pass = require('../../../utils/pass');
 const idt = require('../../../utils/idt');
 const authority = require('../../../utils/authority');
 
@@ -55,14 +54,21 @@ module.exports = (req, res) => {
                     }]
                 })
                 .then(post => {
+                    if (!post) {
+                        deferred.reject(['Not found', _s, 404]);
+                    }
+                    return { post };
+                })
+                .then(({ post = null }) => {
+                    if (!post) return { post };
                     if (!_.has(post, 'User') || !_.has(_s.raw, 'token')) return { post };
                     return [
                         authority,
                         _s => { return { post, p: _s.user_id === post.User.id }; }
                     ].reduce(Q.when, Q(_s));
                 })
-                .then(({ post, p = false }) => {
-                    if (p) return { post };
+                .then(({ post = null, p = false }) => {
+                    if (p || !post) return { post };
                     if (post.password && _s.raw.password === post.password) return { post };
                     if (!post.private && !post.password) return { post };
 
@@ -70,6 +76,7 @@ module.exports = (req, res) => {
                     return {};
                 })
                 .then(({ post = null }) => {
+                    if (!post) return { post };
                     deferred.resolve(_.set(_s, 'post', post ? _.defaultsDeep(
                         {
                             id: post._id_,

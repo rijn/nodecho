@@ -21,7 +21,7 @@ global.dropAndRegisterAndLogin = (userInfo = defaultUserInfo) => {
             return request(_server_)
                 .post('/api/tokens')
                 .send(userInfo)
-                .expect(201)
+                .expect(201);
         })
         .then(response => {
             return response.body;
@@ -40,7 +40,7 @@ global.registerAndLogin = (userInfo = defaultUserInfo) => {
             return request(_server_)
                 .post('/api/tokens')
                 .send(userInfo)
-                .expect(201)
+                .expect(201);
         })
         .then(response => {
             return response.body;

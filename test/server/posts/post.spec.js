@@ -91,13 +91,13 @@ describe('post posts', function () {
                     }, {
                         model: _db_.User
                     }]
-                })
+                });
         };
 
         it('should return Created 201', () => {
             return callPost()
                 .expect(201);
-        })
+        });
 
         describe('should save correct data into db', () => {
             let data;
@@ -123,8 +123,8 @@ describe('post posts', function () {
 
             it('tags', () => {
                 let _tags = _.map(tags, tag => tag.name);
-                _.each(data.Tags, Tag => { assert(_.includes(_tags, Tag.name)); })
-            })
-        })
+                _.each(data.Tags, Tag => { assert(_.includes(_tags, Tag.name)); });
+            });
+        });
     });
 });

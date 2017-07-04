@@ -13,6 +13,7 @@ describe('get posts', function () {
         summary: 'test_summary',
         content: 'test_content',
         location: 'test_location',
+        private: false,
         user_id: null
     };
 
@@ -74,13 +75,13 @@ describe('get posts', function () {
                         .query(_authorize_(anotherToken, { password: '123' }))
                         .expect(401);
                 });
-        })
+        });
     });
 
     describe('should return OK 200 and correct content', () => {
         it('if post is open', () => {
             return _db_.Post
-                .create(_.set(_.clone(post), 'private', false))
+                .create(post)
                 .then(post => {
                     return request(_server_)
                         .get(`/api/posts/${post._id_}`)
@@ -90,7 +91,7 @@ describe('get posts', function () {
                                 assert(response.body[key] === post[key]);
                             });
                             assert(response.body.user.id === token.userid);
-                        })
+                        });
                 });
         });
 
@@ -120,7 +121,7 @@ describe('get posts', function () {
                         .query(_authorize_(token, {}))
                         .expect(200);
                 });
-        })
+        });
 
         it('if post is private but provide correct token', () => {
             return _db_.Post
@@ -152,10 +153,18 @@ describe('get posts', function () {
                         .query(_authorize_(anotherToken, { password }))
                         .expect(200);
                 });
-        })
+        });
     });
 
-    xit('should return Not Found 404 if id is incorrect', () => { });
+    it('should return Not Found 404 if id is incorrect', () => {
+        return _db_.Post
+            .create(post)
+            .then(post => {
+                return request(_server_)
+                    .get(`/api/posts/123`)
+                    .expect(404);
+            });
+    });
 
     xit('should log ip if post was readed', () => { });
 });
