@@ -18,10 +18,18 @@ module.exports = (sequelize, DataTypes) => {
             validate: { notEmpty: true }
         },
         location: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            _validate: { optional: true }
         },
         password: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            _validate: { optional: true }
+        },
+        private: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: true,
+            _validate: { optional: true }
         }
     }, {
         paranoid: true,

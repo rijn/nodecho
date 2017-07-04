@@ -6,9 +6,10 @@ module.exports = function (orm, exclude, extra) {
             _.mapValues(
                 _.pickBy(
                     orm.rawAttributes,
-                    (p) => _.has(p, 'validate')
+                    (p) => _.some(['validate', '_validate'], key => _.has(p, key))
                 ),
                 (param, key) => _.assign(
+                    param.schema || {},
                     _.omit(param.validate, 'is'),
                     {
                         errorMessage: 'Invalid ' + key
