@@ -8,9 +8,12 @@ describe('list posts', function () {
     ];
 
     before(() => {
-        return posts.map(post => {
-            return () => { return Q.delay(10).then(() => { _db_.Post.create(post); }); }
-        }).reduce(Q.when, Q(null));
+        return []
+            .concat([ () => { return _db_.Post.sync({ force: true }); } ])
+            .concat(posts.map(post => {
+                return () => { return Q.delay(10).then(() => { _db_.Post.create(post); }); }
+            }))
+            .reduce(Q.when, Q(null));
     });
 
     it('should be able to list all posts', () => {
