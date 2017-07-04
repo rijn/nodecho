@@ -1,12 +1,143 @@
 describe('get posts', function () {
+    let token = { };
+    before(() => { return dropAndRegisterAndLogin().then(_token => { token = _token; }); });
+
+    let anotherToken = { };
+    before(() => {
+        return registerAndLogin({ username: 'test2', password: 'test_password', email: 'test2@t.com' })
+            .then(_token => { anotherToken = _token; });
+    });
+
+    let post = {
+        title: 'test_title',
+        summary: 'test_summary',
+        content: 'test_content',
+        user_id: null
+    };
+
+    before(() => {
+        return _db_.User
+            .findOne()
+            .then(user => {
+                post.user_id = user.id;
+            });
+    });
+
     describe('should return Unauthorized 401', () => {
-        xit('if post is private', () => { });
-        xit('if post is locked and provide wrong password', () => { });
+        it('if post is private', () => {
+            return _db_.Post
+                .create(_.set(_.clone(post), 'private', true))
+                .then(post => {
+                    return request(_server_)
+                        .get(`/api/posts/${post._id_}`)
+                        .expect(401);
+                });
+        });
+
+        it('if post is locked and provide wrong password', () => {
+            return _db_.Post
+                .create(_.set(_.clone(post), 'password', 'test_password'))
+                .then(post => {
+                    return request(_server_)
+                        .get(`/api/posts/${post._id_}`)
+                        .query({ password: 'hhh' })
+                        .expect(401);
+                });
+        });
+
+        it('if post is private then privide incorrect token', () => {
+            return _db_.Post
+                .create(_.set(_.clone(post), 'private', true), {
+                    include: [{
+                        model: _db_.User
+                    }]
+                })
+                .then(post => {
+                    return request(_server_)
+                        .get(`/api/posts/${post._id_}`)
+                        .query(_authorize_(anotherToken, {}))
+                        .expect(401);
+                });
+        });
+
+        it('if post is locked then privide incorrect token and incorrect password', () => {
+            return _db_.Post
+                .create(_.set(_.clone(post), 'password', '1234'), {
+                    include: [{
+                        model: _db_.User
+                    }]
+                })
+                .then(post => {
+                    return request(_server_)
+                        .get(`/api/posts/${post._id_}`)
+                        .query(_authorize_(anotherToken, { password: '123' }))
+                        .expect(401);
+                });
+        })
     });
 
     describe('should return OK 200 and correct content', () => {
-        xit('if post is open', () => { });
-        xit('is post is locked and provide correct password', () => { });
+        xit('if post is open', () => {});
+
+        it('if post is locked but provide correct password', () => {
+            let password = 'test_password';
+
+            return _db_.Post
+                .create(_.set(_.clone(post), 'password', password))
+                .then(post => {
+                    return request(_server_)
+                        .get(`/api/posts/${post._id_}`)
+                        .query({ password })
+                        .expect(200);
+                });
+        });
+
+        it('if post is locked but privide correct token', () => {
+            return _db_.Post
+                .create(_.set(_.clone(post), 'password', '123'), {
+                    include: [{
+                        model: _db_.User
+                    }]
+                })
+                .then(post => {
+                    return request(_server_)
+                        .get(`/api/posts/${post._id_}`)
+                        .query(_authorize_(token, {}))
+                        .expect(200);
+                });
+        })
+
+        it('if post is private but provide correct token', () => {
+            return _db_.Post
+                .create(_.set(_.clone(post), 'private', true), {
+                    include: [{
+                        model: _db_.User
+                    }]
+                })
+                .then(post => {
+                    return request(_server_)
+                        .get(`/api/posts/${post._id_}`)
+                        .query(_authorize_(token, {}))
+                        .expect(200);
+                });
+        });
+
+        it('if post is locked then privide incorrect token and correct password', () => {
+            let password = 'test_password';
+
+            return _db_.Post
+                .create(_.set(_.clone(post), 'password', password), {
+                    include: [{
+                        model: _db_.User
+                    }]
+                })
+                .then(post => {
+                    return request(_server_)
+                        .get(`/api/posts/${post._id_}`)
+                        .query(_authorize_(anotherToken, { password }))
+                        .expect(200);
+                });
+        })
     });
 
     xit('should return Not Found 404 if id is incorrect', () => { });

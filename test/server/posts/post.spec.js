@@ -17,6 +17,8 @@ describe('post posts', function () {
         title: 'test_title',
         summary: 'test_summary',
         content: 'test_content',
+        password: 'test_password',
+        private: false,
         tags: null
     };
 
