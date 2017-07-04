@@ -55,7 +55,6 @@ module.exports = (req, res) => {
                     }]
                 })
                 .then(post => {
-                    _s.post = post;
                     if (!_.has(post, 'User') || !_.has(_s.raw, 'token')) return { post };
                     return [
                         authority,
@@ -63,20 +62,34 @@ module.exports = (req, res) => {
                     ].reduce(Q.when, Q(_s));
                 })
                 .then(({ post, p = false }) => {
-                    if (p) return pass;
-                    if (post.password && _s.raw.password === post.password) return pass;
-                    if (!post.private && !post.password) return pass;
+                    if (p) return { post };
+                    if (post.password && _s.raw.password === post.password) return { post };
+                    if (!post.private && !post.password) return { post };
 
                     deferred.reject(['Unauthorized', _s, 401]);
-                    return;
+                    return {};
                 })
-                .then(() => {
-                    deferred.resolve(_s);
+                .then(({ post = null }) => {
+                    deferred.resolve(_.set(_s, 'post', post ? _.defaultsDeep(
+                        {
+                            id: post._id_,
+                            user: {
+                                id: _.get(post.User, '_id_')
+                            }
+                        },
+                        _.assign(
+                            {
+                                user: _.get(post.dataValues.User, 'dataValues'),
+                                tags: _.map(post.dataValues.Tags, tag => _.get(tag, 'dataValues'))
+                            },
+                            _.omit(post.dataValues, 'User', 'Tags', 'user_id')
+                        )
+                    ) : null));
                 });
             return deferred.promise;
         })
 
         .done(_s => {
-            res.status(200).send(_s.result);
+            res.status(200).send(_s.post);
         }, errorHandler(res));
 };

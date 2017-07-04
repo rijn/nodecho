@@ -12,6 +12,7 @@ describe('get posts', function () {
         title: 'test_title',
         summary: 'test_summary',
         content: 'test_content',
+        location: 'test_location',
         user_id: null
     };
 
@@ -77,7 +78,21 @@ describe('get posts', function () {
     });
 
     describe('should return OK 200 and correct content', () => {
-        xit('if post is open', () => {});
+        it('if post is open', () => {
+            return _db_.Post
+                .create(_.set(_.clone(post), 'private', false))
+                .then(post => {
+                    return request(_server_)
+                        .get(`/api/posts/${post._id_}`)
+                        .expect(200)
+                        .then(response => {
+                            ['title', 'summary', 'content', 'location'].forEach(key => {
+                                assert(response.body[key] === post[key]);
+                            });
+                            assert(response.body.user.id === token.userid);
+                        })
+                });
+        });
 
         it('if post is locked but provide correct password', () => {
             let password = 'test_password';
