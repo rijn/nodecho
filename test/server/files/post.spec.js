@@ -1,5 +1,4 @@
 const Q = require('q');
-const fs = require('fs');
 const rimraf = require('rimraf');
 
 describe('post files', function () {

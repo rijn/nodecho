@@ -1,0 +1,35 @@
+sudo: true
+
+language: node_js
+
+node_js:
+  - "6.11.0"
+
+python:
+  - "2.7"
+
+compiler:
+  - gcc
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-5
+    - g++-5
+
+install:
+  - npm install -g node-gyp
+  - sudo unlink /usr/bin/gcc && sudo ln -s /usr/bin/gcc-5 /usr/bin/gcc
+  - sudo unlink /usr/bin/g++ && sudo ln -s /usr/bin/g++-5 /usr/bin/g++
+  - gcc --version
+  - g++ --version
+  - make --version
+  - npm install -g apidoc bower grunt grunt-cli
+  - npm install
+
+# command to run tests
+script:
+  - grunt travis
+  # - bash ./deploy/deploy.sh

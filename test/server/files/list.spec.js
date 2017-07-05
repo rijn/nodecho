@@ -2,12 +2,16 @@ const Q = require('q');
 
 describe('list files', function () {
     let token = { };
-    before(() => { return dropAndRegisterAndLogin().then(_token => { token = _token; }); });
-
-    let anotherToken = { };
     before(() => {
-        return registerAndLogin({ username: 'test2', password: 'test_password', email: 'test2@t.com' })
-            .then(_token => { anotherToken = _token; });
+        return dropAndRegisterAndLogin().then(_token => { token = _token; });
+    });
+
+    before(() => {
+        return registerAndLogin({
+            username: 'test2',
+            password: 'test_password',
+            email: 'test2@t.com'
+        });
     });
 
     let files = [
@@ -20,7 +24,11 @@ describe('list files', function () {
         return []
             .concat([ () => { return _db_.File.sync({ force: true }); } ])
             .concat(files.map(file => {
-                return () => { return Q.delay(10).then(() => { _db_.File.create(file, { include: _db_.User }); }); };
+                return () => {
+                    return Q.delay(10).then(() => {
+                        _db_.File.create(file, { include: _db_.User });
+                    });
+                };
             }))
             .reduce(Q.when, Q(null));
     });
@@ -37,7 +45,12 @@ describe('list files', function () {
             .query(token)
             .expect(200)
             .then(response => {
-                assert.deepEqual(response.body.map(file => file.title), files.map(file => file.title));
+                assert.deepEqual(
+                    response.body.map(file => file.key),
+                    files
+                        .filter(file => file.user_id === 1)
+                        .map(file => file.key)
+                );
             });
     });
 
@@ -49,8 +62,10 @@ describe('list files', function () {
                 .expect(200)
                 .then(response => {
                     assert.deepEqual(
-                        response.body.map(file => file.title),
-                        files.map(file => file.title).reverse()
+                        response.body.map(file => file.key),
+                        files
+                            .filter(file => file.user_id === 1)
+                            .map(file => file.key).reverse()
                     );
                 });
         });

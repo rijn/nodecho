@@ -46,7 +46,10 @@ module.exports = (req, res) => {
             let deferred = Q.defer();
             models.File
                 .findAll(_.assign(
-                    { where: { deleted_at: null } },
+                    {
+                        where: { deleted_at: null, user_id: _s.user_id },
+                        attributes: ['id', 'key', 'size', 'created_at']
+                    },
                     _.pick(_s.data, ['offset', 'limit']),
                     _s.data.sort ? { order: [_s.data.sort.split('@')] } : {}
                 ))

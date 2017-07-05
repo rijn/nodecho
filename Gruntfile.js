@@ -120,6 +120,7 @@ module.exports = function (grunt) {
             'continue:on',
             'clean',
             'eslint',
+            'mocha',
             'build',
             'continue:off',
             'continue:fail-on-warning'

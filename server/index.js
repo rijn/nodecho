@@ -70,6 +70,8 @@ if (args.indexOf('--vue') > -1) {
     app.use('/', express.static(path.join(__dirname, '../dist')));
 }
 
+app.use('/files', express.static(path.join(__dirname, '../files')));
+
 if (args.indexOf('--livereload') > -1) {
     console.log('Enabling Livereload Service...');
     app.use(require('connect-livereload')({

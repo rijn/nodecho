@@ -1,5 +1,5 @@
 // 1. start the dev server using production config
-process.env.NODE_ENV = 'testing';
+process.env.NODE_ENV = 'test';
 var server = require('../../build/dev-server.js');
 
 server.ready.then(() => {
