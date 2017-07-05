@@ -166,5 +166,23 @@ describe('get posts', function () {
             });
     });
 
-    xit('should log ip if post was readed', () => { });
+    it('should log ip if post was readed', () => {
+        return _db_.Log
+            .sync({ force: true })
+            .then(() => {
+                return _db_.Post
+                    .create(post);
+            })
+            .then(post => {
+                return request(_server_)
+                    .get(`/api/posts/${post._id_}`)
+            })
+            .then(() => {
+                return _db_.Log
+                    .findAndCountAll();
+            })
+            .then(({ count }) => {
+                assert(count === 1);
+            });
+    });
 });

@@ -111,4 +111,6 @@ describe('modify posts', function () {
                 });
         });
     });
+
+    xit('should log ip if post was modified', () => { });
 });

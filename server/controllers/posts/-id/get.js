@@ -77,21 +77,37 @@ module.exports = (req, res) => {
                 })
                 .then(({ post = null }) => {
                     if (!post) return { post };
-                    deferred.resolve(_.set(_s, 'post', post ? _.defaultsDeep(
-                        {
-                            id: post._id_,
-                            user: {
-                                id: _.get(post.User, '_id_')
-                            }
-                        },
-                        _.assign(
+                    deferred.resolve(_.assign(_s, {
+                        post: post ? _.defaultsDeep(
                             {
-                                user: _.get(post.dataValues.User, 'dataValues'),
-                                tags: _.map(post.dataValues.Tags, tag => _.get(tag, 'dataValues'))
+                                id: post._id_,
+                                user: {
+                                    id: _.get(post.User, '_id_')
+                                }
                             },
-                            _.omit(post.dataValues, 'User', 'Tags', 'user_id')
-                        )
-                    ) : null));
+                            _.assign(
+                                {
+                                    user: _.get(post.dataValues.User, 'dataValues'),
+                                    tags: _.map(post.dataValues.Tags, tag => _.get(tag, 'dataValues'))
+                                },
+                                _.omit(post.dataValues, 'User', 'Tags', 'user_id')
+                            )
+                        ) : null,
+                        post_id: post.id
+                    }));
+                });
+            return deferred.promise;
+        })
+
+        .then(_s => {
+            let deferred = Q.defer();
+            _db_.Log
+                .create({
+                    ip: req.ip,
+                    post_id: _s.post_id
+                })
+                .then(() => {
+                    deferred.resolve(_s);
                 });
             return deferred.promise;
         })
