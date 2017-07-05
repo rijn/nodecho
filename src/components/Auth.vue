@@ -1,19 +1,37 @@
 <template>
     <div class="auth">
-        <input v-model="username">
-        <input v-model="password">
-        <i-button @click="requestToken">Request Token</i-button>
+        <div class="login" v-if="!isLogin">
+            <Row>
+                <i-input v-model="username" placeholder="USERNAME"/>
+            </Row>
+            <Row>
+                <i-input type="password" v-model="password" placeholder="PASSWORD"/>
+            </Row>
+            <Row>
+                <i-button type="primary" @click="requestToken" long>Request Token</i-button>
+            </Row>
+        </div>
+        <div class="logout" v-else>
+            <i-button type="primary" @click="resetToken">Logout</i-button>
+        </div>
     </div>
 </template>
 
 <script>
 import Button from './Button';
+import Input from './Input';
+import { Row } from 'iview/src/components/grid';
 import Message from 'iview/src/components/message';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
     name: 'auth',
 
-    components: { iButton: Button },
+    components: { iButton: Button, iInput: Input, Row },
+
+    computed: {
+        ...mapGetters('token', [ 'isLogin' ])
+    },
 
     data () {
         return {
@@ -23,6 +41,7 @@ export default {
     },
 
     methods: {
+        ...mapActions('token', { setToken: 'set', resetToken: 'reset' }),
         requestToken () {
             this.$api.tokens
                 .generate({
@@ -30,7 +49,8 @@ export default {
                     password: this.password
                 })
                 .then(res => {
-                    console.log(res);
+                    this.username = this.password = null;
+                    this.setToken(res.body);
                 })
                 .catch(res => {
                     Message.error(res.body.error);
@@ -40,5 +60,23 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.auth {
+    display: block;
+    background: #fff;
+
+    text-align: center;
+}
+
+.login {
+    font-size: 1.5em;
+
+    & > *:not(:first-child) {
+        padding-top: 0.5em;
+    }
+
+    button {
+        padding: 1em;
+    }
+}
 </style>

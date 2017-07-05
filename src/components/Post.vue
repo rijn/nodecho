@@ -1,22 +1,22 @@
 <template>
-    <div class="hello">
+    <div class="post">
         <div class="auth">
+            <auth />
         </div>
-        <auth style="max-width: 400px"/>
     </div>
 </template>
 
 <script>
 import Auth from './Auth';
+import Content from './Content';
 
 export default {
     name: 'hello',
 
-    components: { Auth },
+    components: { Auth, Content },
 
     data () {
         return {
-            msg: 'Welcome to Your Vue.js App'
         };
     },
 
@@ -32,5 +32,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+.post {
+    background: #f3f3f3;
+}
+
+.auth {
+    max-width: 400px;
+    padding: 1em;
+    margin: 0 auto;
+}
 </style>

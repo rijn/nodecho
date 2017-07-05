@@ -8,7 +8,7 @@
 const prefixCls = 'ne-btn';
 
 export default {
-    name: 'Button',
+    name: 'button',
     props: {
         type: String,
         disabled: Boolean,
@@ -111,6 +111,7 @@ export default {
     user-select: none;
     .button-size(@btn-padding-base; @btn-font-size; @btn-border-radius);
     transition: color @transition-time linear, background-color @transition-time linear, border @transition-time linear;
+    text-transform: uppercase;
 
     &,
     &:active,

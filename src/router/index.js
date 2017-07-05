@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 const Hello = resolve => require(['@/components/Hello'], resolve);
+const Post = resolve => require(['@/components/Post'], resolve);
 
 Vue.use(Router);
 
@@ -11,6 +12,11 @@ export default new Router({
             path: '/',
             name: 'Hello',
             component: Hello
+        },
+        {
+            path: '/post/:id',
+            name: 'Post',
+            component: Post
         }
     ],
     scrollBehavior (to, from, savedPosition) {
