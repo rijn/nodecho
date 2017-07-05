@@ -71,6 +71,11 @@ describe('modify posts', function () {
     });
 
     describe('should return OK 200 and success', () => {
+        before(() => {
+            return _db_.Log
+                .sync({ force: true })
+        });
+
         let anotherPost = _.merge(post, {
             title: 'test_title_other',
             summary: 'test_summary_other',
@@ -112,5 +117,11 @@ describe('modify posts', function () {
         });
     });
 
-    xit('should log ip if post was modified', () => { });
+    it('should log ip if post was modified', () => {
+        return  _db_.Log
+            .findAndCountAll()
+            .then(({ count }) => {
+                console.log(count === 6);
+            });
+    });
 });

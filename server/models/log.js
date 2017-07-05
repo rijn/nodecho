@@ -5,6 +5,9 @@ module.exports = (sequelize, DataTypes) => {
         ip: {
             type: DataTypes.STRING(15),
             allowNull: false
+        },
+        description: {
+            type: DataTypes.STRING
         }
     }, {
         paranoid: true,

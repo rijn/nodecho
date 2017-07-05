@@ -90,6 +90,20 @@ module.exports = (req, res) => {
             return deferred.promise;
         })
 
+        .then(_s => {
+            let deferred = Q.defer();
+            _db_.Log
+                .create({
+                    ip: req.ip,
+                    post_id: idt.decode('Post', req.params.id),
+                    description: 'put'
+                })
+                .then(() => {
+                    deferred.resolve(_s);
+                });
+            return deferred.promise;
+        })
+
         .done(_s => {
             res.status(200).send();
         }, errorHandler(res));

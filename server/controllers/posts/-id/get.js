@@ -104,7 +104,8 @@ module.exports = (req, res) => {
             _db_.Log
                 .create({
                     ip: req.ip,
-                    post_id: _s.post_id
+                    post_id: _s.post_id,
+                    description: 'get'
                 })
                 .then(() => {
                     deferred.resolve(_s);
