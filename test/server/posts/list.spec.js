@@ -7,7 +7,7 @@ describe('list posts', function () {
         { title: 'test_title_3', summary: 'test_summary_3', content: 'test_content_3' }
     ];
 
-    before(() => {
+    beforeEach(() => {
         return []
             .concat([ () => { return _db_.Post.sync({ force: true }); } ])
             .concat(posts.map(post => {
@@ -46,5 +46,15 @@ describe('list posts', function () {
         });
     });
 
-    xit('should not list posts that have been deleted', () => { });
+    it('should not list posts that have been deleted', () => {
+        return _db_.Post
+            .destroy({ where: { id: 1 } })
+            .then(() => {
+                return request(_server_)
+                    .get('/api/posts')
+            })
+            .then(response => {
+                assert(response.body.length === 2);
+            });
+    });
 });
