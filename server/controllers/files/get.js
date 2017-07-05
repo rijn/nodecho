@@ -26,7 +26,7 @@ const schema = {
 
 module.exports = (req, res) => {
     return Q
-        .fcall(() => { return { raw: req.body }; })
+        .fcall(() => { return { raw: req.query }; })
         .then(authority)
 
         .then(_s => {
