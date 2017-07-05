@@ -5,43 +5,43 @@
 </template>
 
 <script>
-    const prefixCls = 'ne-btn';
+const prefixCls = 'ne-btn';
 
-    export default {
-        name: 'Button',
-        props: {
-            type: String,
-            disabled: Boolean,
-            long: {
-                type: Boolean,
-                default: false
-            }
-        },
-        data () {
-            return {
-                showSlot: true
-            };
-        },
-        computed: {
-            classes () {
-                return [
-                    `${prefixCls}`,
-                    {
-                        [`${prefixCls}-${this.type}`]: !!this.type,
-                        [`${prefixCls}-long`]: this.long
-                    }
-                ];
-            }
-        },
-        methods: {
-            handleClick (event) {
-                this.$emit('click', event);
-            }
-        },
-        mounted () {
-            this.showSlot = this.$slots.default !== undefined;
+export default {
+    name: 'Button',
+    props: {
+        type: String,
+        disabled: Boolean,
+        long: {
+            type: Boolean,
+            default: false
         }
-    };
+    },
+    data () {
+        return {
+            showSlot: true
+        };
+    },
+    computed: {
+        classes () {
+            return [
+                `${prefixCls}`,
+                {
+                    [`${prefixCls}-${this.type}`]: !!this.type,
+                    [`${prefixCls}-long`]: this.long
+                }
+            ];
+        }
+    },
+    methods: {
+        handleClick (event) {
+            this.$emit('click', event);
+        }
+    },
+    mounted () {
+        this.showSlot = this.$slots.default !== undefined;
+    }
+};
 </script>
 
 <style lang="less" scoped>
