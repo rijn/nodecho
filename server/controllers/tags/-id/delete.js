@@ -21,7 +21,7 @@ module.exports = (req, res) => {
                     if (affectedRows) {
                         deferred.resolve(_s);
                     } else {
-                        deferred.reject('Tag id invalid', _s, 404);
+                        deferred.reject(['Not found', _s, 404]);
                     }
                 });
             return deferred.promise;

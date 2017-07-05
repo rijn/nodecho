@@ -161,7 +161,7 @@ describe('get posts', function () {
             .create(post)
             .then(post => {
                 return request(_server_)
-                    .get(`/api/posts/123`)
+                    .get('/api/posts/123')
                     .expect(404);
             });
     });

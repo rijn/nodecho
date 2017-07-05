@@ -16,13 +16,13 @@ describe('modify posts', function () {
         return dropAndRegisterAndLogin()
             .then(_token => { token = _token; })
             .then(() => {
-                return _db_.User.findOne()
+                return _db_.User.findOne();
             })
             .then(user => {
                 post.user_id = user.id;
             })
             .then(() => {
-                return _db_.Post.sync({ force: true })
+                return _db_.Post.sync({ force: true });
             })
             .then(() => {
                 return _db_.Post.create(post);
@@ -39,14 +39,14 @@ describe('modify posts', function () {
                 .then(_token => { anotherToken = _token; });
         });
 
-        xit('when calling put', () => {
+        it('when calling put', () => {
             return request(_server_)
                 .put(`/api/posts/${postId}`)
-                .send(_authorize_(anotherToken, {}))
+                .send(_authorize_(anotherToken, post))
                 .expect(401);
         });
 
-        xit('when calling delete', () => {
+        it('when calling delete', () => {
             return request(_server_)
                 .delete(`/api/posts/${postId}`)
                 .send(_authorize_(anotherToken, {}))
@@ -55,27 +55,60 @@ describe('modify posts', function () {
     });
 
     describe('should return Not Found 404 if id was incorrect', () => {
-        xit('when calling put', () => {
+        it('when calling put', () => {
             return request(_server_)
-                .put(`/api/posts/123`)
-                .send(_authorize_(token, {}))
+                .put('/api/posts/123')
+                .send(_authorize_(token, post))
                 .expect(404);
         });
 
-        xit('when calling delete', () => {
+        it('when calling delete', () => {
             return request(_server_)
-                .delete(`/api/posts/123`)
+                .delete('/api/posts/123')
                 .send(_authorize_(token, {}))
                 .expect(404);
         });
     });
 
     describe('should return OK 200 and success', () => {
-        xit('when calling put', () => { });
-        xit('when calling delte', () => { });
+        let anotherPost = _.merge(post, {
+            title: 'test_title_other',
+            summary: 'test_summary_other',
+            content: 'test_content_other',
+            location: 'test_location_other',
+            private: true
+        });
+
+        it('when calling put', () => {
+            return request(_server_)
+                .put(`/api/posts/${postId}`)
+                .send(_authorize_(token, anotherPost))
+                .expect(200);
+        });
+
+        it('data should be changed', () => {
+            return _db_.Post
+                .findOne()
+                .then(post => {
+                    assert.deepStrictEqual(anotherPost, _.pick(post.dataValues, _.keys(anotherPost)));
+                });
+        });
+
+        it('when calling delte', () => {
+            return request(_server_)
+                .delete(`/api/posts/${postId}`)
+                .send(_authorize_(token, {}))
+                .expect(200);
+        });
+
+        it('entry should be removed', () => {
+            return _db_.Post
+                .findOne({
+                    where: { deleted_at: null }
+                })
+                .then(post => {
+                    assert(!post);
+                });
+        });
     });
-
-    xit('should change data after calling put', () => { });
-
-    xit('should delete entry after calling delete', () => { });
 });

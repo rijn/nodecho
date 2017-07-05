@@ -45,6 +45,7 @@ module.exports = (req, res) => {
             let deferred = Q.defer();
             models.Post
                 .findAll(_.assign(
+                    { where: { deleted_at: null } },
                     _.pick(_s.data, ['offset', 'limit']),
                     {
                         attributes: ['id', 'title', 'summary', 'created_at'],
