@@ -1,6 +1,17 @@
-const merge = require('lodash').merge;
-const prodConf = require('./prod.conf');
+const tryRequire = require('tryrequire');
 const path = require('path');
+const merge = require('lodash').merge;
+
+let prodConf = {};
+try {
+    prodConf = require('./prod.conf');
+} catch (e) {
+    if (e.code !== 'MODULE_NOT_FOUND') {
+        throw e;
+    }
+};
+
+console.log(prodConf);
 
 module.exports = merge(prodConf, {
     'db': {
@@ -10,9 +21,13 @@ module.exports = merge(prodConf, {
         user: 'root',
         password: 'root',
         database: 'nodecho',
-        logging: false
+        logging: false,
+        define: {
+            underscored: true
+        }
     },
     'file': {
-        path: path.join(__dirname, '../tmp')
+        path: path.join(__dirname, '../tmp'),
+        mimetype: ['image/gif', 'image/x-png', 'image/pjpeg', 'image/jpg', 'image/jpeg', 'image/png']
     }
 });

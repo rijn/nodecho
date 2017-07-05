@@ -1,7 +1,16 @@
 var path = require('path');
 var merge = require('lodash').merge;
 
-module.exports = merge(require('./' + (process.env.NODE_ENV || 'test') + '.conf'), {
+let conf = {};
+try {
+    conf = require('./' + (process.env.NODE_ENV || 'test') + '.conf');
+} catch (e) {
+    if (e.code !== 'MODULE_NOT_FOUND') {
+        throw e;
+    }
+};
+
+module.exports = merge(conf, {
     build: {
         env: require('./prod.env'),
         index: path.resolve(__dirname, '../dist/index.html'),

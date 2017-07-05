@@ -22,6 +22,7 @@
     "scrypt": "^6.0.3",
     "sequelize": "^4.2.1",
     "sqlite3": "^3.1.8",
+    "tryrequire": "^1.1.5",
     "vue": "^2.3.3",
     "vue-router": "^2.3.1"
   },
