@@ -73,7 +73,7 @@ describe('modify posts', function () {
     describe('should return OK 200 and success', () => {
         before(() => {
             return _db_.Log
-                .sync({ force: true })
+                .sync({ force: true });
         });
 
         let anotherPost = _.merge(post, {
@@ -118,7 +118,7 @@ describe('modify posts', function () {
     });
 
     it('should log ip if post was modified', () => {
-        return  _db_.Log
+        return _db_.Log
             .findAndCountAll()
             .then(({ count }) => {
                 console.log(count === 6);

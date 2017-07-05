@@ -1,5 +1,6 @@
-var merge = require('lodash').merge;
-var prodConf = require('./prod.conf');
+const merge = require('lodash').merge;
+const prodConf = require('./prod.conf');
+const path = require('path');
 
 module.exports = merge(prodConf, {
     'db': {
@@ -10,5 +11,8 @@ module.exports = merge(prodConf, {
         password: 'root',
         database: 'nodecho',
         logging: false
+    },
+    'file': {
+        path: path.join(__dirname, '../tmp')
     }
 });

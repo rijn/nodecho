@@ -175,7 +175,7 @@ describe('get posts', function () {
             })
             .then(post => {
                 return request(_server_)
-                    .get(`/api/posts/${post._id_}`)
+                    .get(`/api/posts/${post._id_}`);
             })
             .then(() => {
                 return _db_.Log

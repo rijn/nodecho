@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
 var _ = require('underscore');
 var multer = require('multer');
+var storage = multer.memoryStorage();
 var history = require('connect-history-api-fallback');
 var args = process.argv.slice(2);
 
@@ -22,7 +23,7 @@ app.use(multer({
         files: 1,
         fileSize: 1 * 1024 * 1024
     },
-    inMemory: true
+    storage: storage
 }).any());
 
 // inject validator

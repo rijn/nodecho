@@ -51,7 +51,7 @@ describe('list posts', function () {
             .destroy({ where: { id: 1 } })
             .then(() => {
                 return request(_server_)
-                    .get('/api/posts')
+                    .get('/api/posts');
             })
             .then(response => {
                 assert(response.body.length === 2);
