@@ -30,7 +30,7 @@ module.exports = (req, res) => {
                 if (!fs.existsSync(conf.path)) {
                     fs.mkdir(conf.path);
                 }
-            } finally {
+            } catch (e) {
                 deferred.resolve(_s);
             }
             return deferred.promise;
