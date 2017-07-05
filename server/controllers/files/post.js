@@ -28,7 +28,7 @@ module.exports = (req, res) => {
             var deferred = Q.defer();
             try {
                 if (!fs.existsSync(conf.path)) {
-                    fs.mkdir(conf.path);
+                    fs.mkdirSync(conf.path);
                 }
             } catch (e) {};
             deferred.resolve(_s);
