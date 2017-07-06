@@ -72,7 +72,7 @@ module.exports = (req, res) => {
                     if (post.password && _s.raw.password === post.password) return { post };
                     if (!post.private && !post.password) return { post };
 
-                    deferred.reject(['Unauthorized', _s, 401]);
+                    deferred.reject({ message: 'Unauthorized', _s, statusCode: 401, extra: { passwordRequired: true } });
                     return {};
                 })
                 .then(({ post = null }) => {
