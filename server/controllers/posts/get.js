@@ -45,26 +45,27 @@ module.exports = (req, res) => {
             let deferred = Q.defer();
             models.Post
                 .findAll(_.assign(
-                    { where: { deleted_at: null } },
-                    _.pick(_s.data, ['offset', 'limit']),
                     {
+                        where: { deleted_at: null },
                         attributes: ['id', 'title', 'summary', 'created_at'],
                         include: [{
+                            duplicating: false,
                             model: models.Tag,
                             through: {
                                 model: models.ItemTag,
                                 attributes: []
                             },
-                            attributes: {
-                                include: ['id', 'name']
-                            }
+                            attributes: ['id', 'name']
                         }, {
                             model: models.User,
                             attributes: ['id', 'username']
                         }]
                     },
+                    _.mapValues(_.pick(_s.data, ['offset', 'limit']), v => parseInt(v)),
                     _s.data.sort ? { order: [_s.data.sort.split('@')] } : {}
-                ))
+                ), {
+                    subQuery: false
+                })
                 .then(posts => {
                     _s.result = _.map(
                         posts || [],
