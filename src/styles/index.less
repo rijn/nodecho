@@ -1,13 +1,22 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'NotoSans-Regular';
+    src: url('fonts/NotoSans-Regular-webfont.eot');
+    src: url('fonts/NotoSans-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('fonts/NotoSans-Regular-webfont.woff') format('woff'), url('fonts/NotoSans-Regular-webfont.ttf') format('truetype'), url('fonts/NotoSans-Regular-webfont.svg#noto_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 // Color
 @primary-color          : #ffa4be;
-@link-color             : #ffa4be;
-@link-hover-color       : tint(@link-color, 20%);
-@link-active-color      : shade(@link-color, 5%);
+@link-color             : shade(@primary-color, 10%);
+@link-hover-color       : tint(@link-color, 30%);
+@link-active-color      : shade(@link-color, 10%);
 @selected-color         : fade(@primary-color, 90%);
 
 // Base
 @body-background        : #fff;
-@font-family            : "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+@font-family            : 'NotoSans-Regular', 'Helvetica Neue', Helvetica, 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
 @code-family            : Consolas,Menlo,Courier,monospace;
 @title-color            : #1c2438;
 @text-color             : #495060;
@@ -24,9 +33,9 @@
 @background-color-base  : #f7f7f7;  // base
 
 // Button
-@btn-font-weight        : 600;
-@btn-padding-base       : 0.7em 1em;
-@btn-font-size          : 15px;
+@btn-font-weight        : normal;
+@btn-padding-base       : 0.7em 1.4em;
+@btn-font-size          : 1rem;
 @btn-border-radius      : 0px;
 
 @btn-disable-color      : #bbbec4;
@@ -39,6 +48,10 @@
 
 @btn-primary-color      : #fff;
 @btn-primary-bg         : @primary-color;
+
+@btn-ghost-color        : #fff;
+@btn-ghost-bg           : fade(#fff, 20%);
+@btn-ghost-border       : @border-color-base;
 
 // Animation
 @animation-time         : .3s;

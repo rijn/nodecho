@@ -160,6 +160,20 @@ export default {
     }
 }
 
+.btn-ghost() {
+    .button-variant(@btn-ghost-color, @btn-ghost-bg, @btn-ghost-border);
+
+    &:hover
+    //&:focus
+    {
+        .button-color(tint(@primary-color, 20%); @btn-ghost-bg; tint(@primary-color, 20%));
+    }
+    &:active,
+    &.active {
+        .button-color(shade(@primary-color, 5%); @btn-ghost-bg; shade(@primary-color, 5%));
+    }
+}
+
 @btn-prefix-cls: ~"ne-btn";
 
 .@{btn-prefix-cls} {
@@ -172,6 +186,10 @@ export default {
 
     &-primary {
         .btn-primary;
+    }
+
+    &-ghost {
+        .btn-ghost;
     }
 
     &:before {

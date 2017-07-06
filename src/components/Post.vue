@@ -33,10 +33,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.post {
-    background: #f3f3f3;
-}
-
 .auth {
     max-width: 400px;
     padding: 1em;

@@ -1,18 +1,12 @@
 <template>
     <div class="hello">
-        <div class="auth">
-        </div>
-        <auth style="max-width: 400px"/>
+        <router-link :to="{ name: 'Post', params: { id: 1 } }">Link</router-link>
     </div>
 </template>
 
 <script>
-import Auth from './Auth';
-
 export default {
     name: 'hello',
-
-    components: { Auth },
 
     data () {
         return {
@@ -32,5 +26,5 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 </style>
