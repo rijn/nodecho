@@ -71,7 +71,7 @@ module.exports = (req, res) => {
 
         .then(_s => {
             let deferred = Q.defer();
-            _db_.Log
+            models.Log
                 .create({
                     ip: req.ip,
                     post_id: idt.decode('Post', req.params.id),
