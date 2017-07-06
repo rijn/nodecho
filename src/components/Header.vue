@@ -9,7 +9,7 @@
                     <li>
                         <logo />
                     </li>
-                    <li class="right">
+                    <li class="right pc-only">
                         <i-button type="ghost" @click="toSourceCode">Source Code on Github</i-button>
                     </li>
                 </ul>

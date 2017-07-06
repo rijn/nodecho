@@ -13,7 +13,7 @@ import Content from './Content';
 export default {
     name: 'hello',
 
-    components: { Auth, Content },
+    components: { Auth, iContent: Content },
 
     data () {
         return {

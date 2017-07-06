@@ -107,4 +107,15 @@ pre,
 samp {
     font-family: @code-family;
 }
+
+@media screen and (max-width: 769px) {
+    .pc-only {
+        display: none !important;
+    }
+}
+@media screen and (min-width: 768px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
 </style>
