@@ -41,6 +41,27 @@ export default {
                     title: 'View',
                     key: 'view',
                     sortable: true
+                },
+                {
+                    title: 'Operation',
+                    width: 150,
+                    align: 'center',
+                    render: (h, params) => {
+                        return h('div', [
+                            h('a', {
+                                on: {
+                                    click: () => {
+                                        this.$router.push({
+                                            name: 'AdminEdit',
+                                            params: {
+                                                id: params.row.id
+                                            }
+                                        });
+                                    }
+                                }
+                            }, 'Edit')
+                        ]);
+                    }
                 }
             ],
             posts: null
@@ -64,7 +85,7 @@ export default {
                 });
         },
         newPost () {
-            this.$router.push({ name: 'AdminEdit' });
+            this.$router.push({ name: 'AdminEdit', params: { id: 'new' } });
         }
     },
 

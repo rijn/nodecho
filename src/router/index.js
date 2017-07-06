@@ -38,7 +38,7 @@ export default new Router({
                     component: AdminPost
                 },
                 {
-                    path: 'edit',
+                    path: 'edit/:id',
                     name: 'AdminEdit',
                     component: AdminEdit
                 }

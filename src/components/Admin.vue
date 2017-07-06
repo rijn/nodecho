@@ -8,7 +8,7 @@
                 <ul>
                     <li><router-link :to="{ name: 'AdminHome' }"><a>Home</a></router-link></li>
                     <li><router-link :to="{ name: 'AdminPost' }"><a>Post</a></router-link></li>
-                    <li><router-link :to="{ name: 'AdminEdit' }"><a>New</a></router-link></li>
+                    <li><router-link :to="{ name: 'AdminEdit', params: { id: 'new' } }"><a>New</a></router-link></li>
                 </ul>
             </div>
         </div>
