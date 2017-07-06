@@ -32,7 +32,6 @@
                 NEXT
             </i-button>
         </div>
-        <router-link :to="{ name: 'Post', params: { id: 1 } }">Link</router-link>
     </div>
 </template>
 

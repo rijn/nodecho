@@ -69,6 +69,9 @@ export default {
         },
         focus () {
             this.$refs.input.focus();
+        },
+        setCurrentValue (value) {
+            this.currentValue = value;
         }
     },
     watch: {

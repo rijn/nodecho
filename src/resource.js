@@ -14,7 +14,7 @@ export default class Resource {
     static install (Vue, options) {
         this.models = {
             files: Vue.resource('files'),
-            posts: Vue.resource('posts'),
+            posts: Vue.resource('posts{/id}'),
             tokens: Vue.resource('tokens', {}, {
                 generate: { method: 'POST' }
             })

@@ -102,6 +102,12 @@ header {
     .thin {
         .thin-inner {
             padding: 2rem;
+
+            @media screen and (max-width: 769px) {
+                ul {
+                    text-align: center;
+                }
+            }
         }
     }
 

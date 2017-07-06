@@ -1,25 +1,27 @@
 <template>
-    <article class="post">
-        <header class="post-header">
-            <h1 class="post-title">
-                <router-link class="post-title-link" :to="to">
+    <article class="content">
+        <header class="content-header">
+            <h1 class="content-title">
+                <router-link class="content-title-link" v-if="to" :to="to">
                     {{ title }}
                 </router-link>
+                <span class="content-title-link" v-else>
+                    {{ title }}
+                </span>
             </h1>
         </header>
-        <section class="post-excerpt post-markdown">
-            <p>
-                {{ content }}
-            </p>
+        <section class="content-excerpt content-markdown markdown" v-html="contentHtml">
         </section>
-        <footer class="post-meta" style="display:none">
+        <footer class="content-meta" style="display:none">
             <!--<%= data.tags.join(",") %>-->
-            <time class="post-date" datetime="<%= data.time %>"><%= new Date(Number(data.time)).toDateString() %></time></time>
+            <time class="content-date" datetime="<%= data.time %>"><%= new Date(Number(data.time)).toDateString() %></time></time>
         </footer>
     </article>
 </template>
 
 <script>
+import { markdown } from 'markdown';
+
 export default {
     name: 'content',
 
@@ -27,16 +29,25 @@ export default {
         title: String,
         content: String,
         to: Object
+    },
+
+    computed: {
+        contentHtml: function () { return markdown.toHTML(this.content || ''); }
     }
 };
 </script>
 
 <style lang="less" scoped>
-.post {
+.content {
     position: relative;
     width: 80%;
     max-width: 780px;
     margin: 4rem auto;
+    @media screen and (max-width: 769px) {
+        width: auto;
+        padding: 0 1rem;
+        margin: 1rem auto;
+    }
     padding-bottom: 4rem;
     word-break: break-word;
     hyphens: auto;
@@ -44,123 +55,134 @@ export default {
     font-size: 20px;
 
     @media screen and (max-width: 769px) {
-        font-size: 15px;
+        font-size: 14px;
     }
 
     header {
-        h1.post-title {
-            font-size: 2.2em;
+        h1.content-title {
+            font-size: 2em;
+        }
+    }
+
+    .content-markdown {
+        margin: 2rem 0 0 0;
+        @media screen and (max-width: 769px) {
+            margin: 0;
+        }
+        font-size: 1em;
+        line-height: 1.8em;
+        @media screen and (max-width: 769px) {
+            line-height: 1.65em;
         }
     }
 }
 
-.post-index{
-    position: relative;
-    width: 80%;
-    max-width: 780px;
-    padding: 4rem auto;
-    word-break: break-word;
-    hyphens: auto;
+// .content-index{
+//     position: relative;
+//     width: 80%;
+//     max-width: 780px;
+//     padding: 4rem auto;
+//     word-break: break-word;
+//     hyphens: auto;
+// }
+
+// .content-meta {
+//     display: block;
+//     margin: 2rem 0 0.6rem 0;
+//     font-size: 1.5em;
+//     line-height: 2.2em;
+//     color: #9EABB3;
+// }
+
+// .content-date,
+// .content-views {
+//     display: inline-block;
+//     margin-left: 8px;
+//     padding-left: 12px;
+//     border-left: #d5dbde 1px solid;
+//     text-transform: uppercase;
+//     font-size: 1.3em;
+//     white-space: nowrap;
+// }
+</style>
+
+<style lang="less">
+@import '../styles/index.less';
+
+.markdown > * {
+    margin: 0 0 1em 0;
 }
 
-.post-meta {
-    display: block;
-    margin: 2rem 0 0.6rem 0;
-    font-size: 1.5em;
-    line-height: 2.2em;
-    color: #9EABB3;
-}
-
-.post-date,
-.post-views {
-    display: inline-block;
-    margin-left: 8px;
-    padding-left: 12px;
-    border-left: #d5dbde 1px solid;
-    text-transform: uppercase;
-    font-size: 1.3em;
-    white-space: nowrap;
-}
-
-
-.post-markdown {
-    margin: 2rem 0 0 0;
-    font-size: 1em;
-    line-height: 1.8em;
-}
-
-.post-markdown img{
+.markdown img{
     width: 100%;
 }
 
-.post-markdown h1 {
+.markdown h1 {
     font-size: 2em;
     letter-spacing: -2px;
     text-indent: -1px;
 }
 
-.post-markdown h2 {
+.markdown h2 {
     font-size: 1.8em;
     text-indent: -1px;
 }
 
-.post-markdown h3 {
+.markdown h3 {
     font-size: 1.6em;
     text-indent: 0px;
 }
 
-.post-markdown h4 {
+.markdown h4 {
     font-size: 1.4em;
 }
 
-.post-markdown h5 {
+.markdown h5 {
     font-size: 1.2em;
 }
 
-.post-markdown h6 {
+.markdown h6 {
     font-size: 1.1em;
 }
 
-.post-markdown p {
+.markdown p {
     font-size: 1em;
 }
 
-.post-markdown blockquote {
-    margin-left: -35px;
+.markdown blockquote {
+    margin-left: -1.5em;
     margin-right: 0;
-    padding-left: 30px;
+    padding-left: 1.5em;
     font-style: italic;
     font-family: "Lucida Grande", sans-serif;
-    border-left: solid 5px rgb(74, 74, 74)
+    border-left: solid 5px @text-color;
+
+    @media screen and (max-width: 769px) {
+        margin-left: 0px;
+        margin-right: 1em;
+        padding-left: 1em;
+        border-left: solid 4px @text-color;
+    }
 }
 
-.post-markdown hr {
+.markdown hr {
     border: 0;
-    border-top: solid 1px #EBF2F6;
+    border-top: solid 1px @text-color;
+    margin: 2em 0;
 }
 
-.post-markdown code {
+.markdown code {
     background: rgba(0, 0, 0, 0.07);
     padding: 2px 4px;
-    border-radius: 3px
+    border-radius: 3px;
 }
 
-.post-markdown pre > code {
+.markdown pre > code {
     background: 0;
     padding: 0;
     margin: 0;
     font-size: 0.8em;
     line-height: 1em;
     font-family: "Lucida Grande", sans-serif;
-}
-
-.post-markdown a {
-    color: #eb8dc5;
-    /*color: rgb(0, 136, 204)*/
-}
-
-.post-markdown a:hover {
-    color: #eb6ab7;
-    /*color: rgb(0, 100, 170)*/
 }
 </style>

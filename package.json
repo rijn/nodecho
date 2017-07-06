@@ -94,6 +94,7 @@
     "less-loader": "^4.0.4",
     "load-grunt-tasks": "^3.5.2",
     "lolex": "^1.5.2",
+    "markdown": "^0.5.0",
     "mocha": "^3.2.0",
     "nightwatch": "^0.9.12",
     "normalize.css": "^7.0.0",
