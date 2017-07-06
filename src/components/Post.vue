@@ -17,6 +17,8 @@
 import Auth from './Auth';
 import Content from './Content';
 import Message from 'iview/src/components/message';
+import store from 'store';
+import { mapGetters } from 'vuex';
 
 export default {
     name: 'hello',
@@ -36,6 +38,7 @@ export default {
     },
 
     computed: {
+        ...mapGetters('token', [ 'token', 'isLogin' ]),
         authType: function () {
             return this.auth.private ? 'account' : this.auth.passwordRequired ? 'password' : null;
         }
@@ -54,13 +57,19 @@ export default {
     methods: {
         fetch () {
             this.post = this.message = null;
+            let password = store.get(this.$route.params.id) || { password: null };
+            password = this.auth.password || password.password;
             this.$api.posts
-                .get({
-                    id: this.$route.params.id || '',
-                    password: this.auth.password
-                })
+                .get(Object.assign(
+                    {
+                        id: this.$route.params.id || '',
+                        password: password
+                    },
+                    this.isLogin ? this.token : {}
+                ))
                 .then(res => {
                     this.post = res.body;
+                    store.set(this.$route.params.id, { password });
                 })
                 .catch(err => {
                     this.message = err.body.error;

@@ -108,6 +108,7 @@
     "shelljs": "^0.7.6",
     "sinon": "^2.1.0",
     "sinon-chai": "^2.8.0",
+    "store": "^2.0.12",
     "supertest": "^3.0.0",
     "time-grunt": "^1.4.0",
     "url-loader": "^0.5.8",
