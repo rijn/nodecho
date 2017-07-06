@@ -38,7 +38,6 @@ export default {
     max-width: 780px;
     margin: 4rem auto;
     padding-bottom: 4rem;
-    border-bottom: #EBF2F6 1px solid;
     word-break: break-word;
     hyphens: auto;
 

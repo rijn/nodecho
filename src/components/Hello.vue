@@ -1,50 +1,103 @@
 <template>
     <div class="hello">
-        <template v-if="posts">
-            <i-content
-                v-for="post in posts"
-                :title="post.title"
-                :content="post.summary"
-                :to="{ name: 'Post', params: { id: post.id } }" />
-        </template>
+        <div v-if="posts === null">
+        </div>
+        <div v-else>
+            <template v-if="posts.length > 0">
+                <i-content
+                    class="post"
+                    v-for="post in posts"
+                    :key="post.id"
+                    :title="post.title"
+                    :content="post.summary"
+                    :to="{ name: 'Post', params: { id: post.id } }" />
+            </template>
+            <div v-else>
+                NO MORE POST
+            </div>
+        </div>
+        <div class="nav">
+            <i-button
+                type="primary"
+                class="prev"
+                @click="pushQuery({ offset: query.offset - query.limit < 0 ? 0 : query.offset - query.limit })"
+                :disabled="query.offset <= 0">
+                PREV
+            </i-button>
+            <i-button
+                type="primary"
+                class="next"
+                @click="pushQuery({ offset: query.offset + query.limit })"
+                :disabled="!(posts && posts.length >= query.limit)">
+                NEXT
+            </i-button>
+        </div>
         <router-link :to="{ name: 'Post', params: { id: 1 } }">Link</router-link>
     </div>
 </template>
 
 <script>
+import Button from './Button';
 import Content from './Content';
 
 export default {
     name: 'hello',
 
-    components: { iContent: Content },
+    components: { iContent: Content, iButton: Button },
 
     data () {
         return {
-            offset: 0,
-            limit: 10,
+            query: {
+                offset: 0,
+                limit: 10
+            },
             posts: null
         };
+    },
+
+    watch: {
+        '$route': {
+            deep: true,
+            handler: function (to) { this.assignQuery(to); }
+        }
     },
 
     methods: {
         fetch () {
             this.$api.posts
-                .get()
+                .get(this.query)
                 .then(res => {
                     this.posts = res.body;
                 });
+        },
+        assignQuery (route) {
+            this.query.offset = parseInt(route.query.offset || '0');
+            this.$nextTick(() => { this.fetch(); });
+        },
+        pushQuery (query) {
+            this.$router.push({ name: 'Hello', query });
         }
     },
 
     mounted () {
-        this.fetch();
+        this.assignQuery(this.$route);
     }
 };
 </script>
 
 <style lang="less" scoped>
+@import '../styles/index.less';
+
 .hello {
     overflow: hidden;
+}
+
+.post:not(:last-child) {
+    border-bottom: shade(@background-color-base, 10%) 1px solid;
+}
+
+.nav {
+    text-align: center;
+    padding: 3rem;
 }
 </style>

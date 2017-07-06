@@ -39,7 +39,7 @@ body {
 }
 
 #core {
-    background: #f3f3f3;
+    background: @background-color-base;
 }
 
 * {
