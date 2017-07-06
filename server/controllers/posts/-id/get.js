@@ -62,10 +62,16 @@ module.exports = (req, res) => {
                 .then(({ post = null }) => {
                     if (!post) return { post };
                     if (!_.has(post, 'User') || !_.has(_s.raw, 'token')) return { post };
-                    return [
+                    [
                         authority,
                         _s => { return { post, p: _s.user_id === post.User.id }; }
-                    ].reduce(Q.when, Q(_s));
+                    ].reduce(Q.when, Q(_s)).catch(() => {
+                        deferred.reject({
+                            message: 'Invalid token',
+                            _s,
+                            statusCode: 400
+                        });
+                    });
                 })
                 .then(({ post = null, p = false }) => {
                     if (p || !post) return { post };
