@@ -12,7 +12,7 @@
             </Row>
         </div>
         <div class="logout" v-else>
-            <i-button type="primary" @click="resetToken">Logout</i-button>
+            <i-button type="primary" @click="logout">Logout</i-button>
         </div>
     </div>
     <div class="auth" v-else>
@@ -69,6 +69,7 @@ export default {
                     .then(res => {
                         this.username = this.password = null;
                         this.setToken(res.body);
+                        this.$emit('change');
                     })
                     .catch(res => {
                         Message.error(res.body.error);
@@ -76,6 +77,10 @@ export default {
             } else {
                 this.$emit('submit', this.password);
             }
+        },
+        logout () {
+            this.resetToken();
+            this.$emit('change');
         }
     }
 };

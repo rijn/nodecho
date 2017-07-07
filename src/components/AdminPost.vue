@@ -72,9 +72,17 @@ export default {
         ...mapGetters('token', [ 'token', 'isLogin' ])
     },
 
+    watch: {
+        isLogin () { this.verifyIsLogin(); }
+    },
+
     methods: {
+        verifyIsLogin () {
+            if (!this.isLogin) this.$router.push({ name: 'AdminHome' });
+        },
         fetch () {
             this.posts = null;
+            this.verifyIsLogin();
             this.$api.posts
                 .get()
                 .then(res => {

@@ -107,7 +107,7 @@ export default {
 </style>
 
 <style lang="less">
-@import '../styles/index.less';
+@import '../styles/custom.less';
 
 .markdown > * {
     margin: 0 0 1em 0;

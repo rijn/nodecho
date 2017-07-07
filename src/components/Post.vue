@@ -7,7 +7,7 @@
         <template v-else>
             <div class="message" v-if="message">{{ message }}</div>
             <div class="auth">
-                <auth v-if="authType" :type="authType" v-on:submit="submit" />
+                <auth v-if="authType" :type="authType" v-on:submit="submit" v-on:change="fetch"/>
             </div>
         </template>
     </div>

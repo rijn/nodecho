@@ -85,7 +85,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '../styles/index.less';
+@import '../styles/custom.less';
 
 .hello {
     overflow: hidden;

@@ -30,18 +30,25 @@ export default {
 
 <style lang="less" scoped>
 .container {
-    padding: 0.5rem;
+    padding: 0.5rem 0;
+
+    position: relative;
 
     overflow: hidden;
-    min-width: 960px;
+    width: 1000px;
+
+    margin: 0 auto;
 
     .left {
-        width: 360px;
+        width: 300px;
         float: left;
     }
 
     .right {
-        margin-left: 360px;
+        float: left;
+        width: 700px;
+        // padding-left: 360px;
+        z-index: 10;
     }
 }
 

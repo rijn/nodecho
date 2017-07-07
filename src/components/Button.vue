@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@import '../styles/index.less';
+@import '../styles/custom.less';
 
 .button-size(@padding; @font-size; @border-radius) {
     padding: @padding;

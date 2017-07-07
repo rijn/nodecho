@@ -4,7 +4,7 @@ import router from './router';
 import resource from './resource';
 import store from './store';
 
-import 'iview/dist/styles/iview.css';
+import './styles/index.less';
 import 'normalize.css/normalize.css';
 
 Vue.config.productionTip = false;
