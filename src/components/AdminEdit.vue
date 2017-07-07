@@ -121,7 +121,8 @@ export default {
             (this.$route.params.id === 'new'
                 ? this.$api.posts.save
                 : this.$api.posts.update)(
-                    { id: this.$route.params.id },
+                    this.$route.params.id === 'new'
+                        ? {} : { id: this.$route.params.id },
                     Object.assign(
                         pick(this.form, Object.keys(emptyFrom)),
                         this.token
@@ -129,6 +130,9 @@ export default {
                 )
                 .then(res => {
                     Message.success('Update successfully');
+                    if (this.$route.params.id === 'new') {
+                        this.$router.push({ name: 'AdminEdit', params: { id: res.body.id } });
+                    }
                 })
                 .catch(err => {
                     Message.error(err.body.error);

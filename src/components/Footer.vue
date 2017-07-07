@@ -5,16 +5,13 @@
                 &copy; Rijn, 2017
             </li>
             <li>
-                <a>Homepage</a>
+                <a href="https://rijnx.com/">Homepage</a>
             </li>
             <li>
-                <a>Blog</a>
+                <a href="http://blog.rijnx.com/">Blog</a>
             </li>
             <li>
-                <a>CV</a>
-            </li>
-            <li>
-                <a>GitHub</a>
+                <a href="https://github.com/rijn">GitHub</a>
             </li>
             <li class="right">
                 <logo dark width="40px"/>
