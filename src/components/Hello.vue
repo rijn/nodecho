@@ -48,7 +48,8 @@ export default {
         return {
             query: {
                 offset: 0,
-                limit: 10
+                limit: 10,
+                sort: 'created_at@DESC'
             },
             posts: null
         };
