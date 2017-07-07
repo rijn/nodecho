@@ -1,4 +1,10 @@
+import Vue from 'vue';
+
 import * as types from '../mutation-types';
+
+import store from 'store';
+import expirePlugin from 'store/plugins/expire';
+store.addPlugin(expirePlugin);
 
 const state = {
     userid: null,
@@ -23,7 +29,16 @@ const mutations = {
     [types.SET_TOKEN] (state, { userid = null, token = null } = {}) {
         state.userid = userid;
         state.token = token;
+
+        let expiration = new Date().getTime() + 1 * 24 * 60 * 60 * 1000;
+        store.set('token', { userid, token }, expiration);
+        console.log(store.get('token'));
     }
+};
+
+if (store.get('token')) {
+    Vue.set(state, 'userid', store.get('token').userid);
+    Vue.set(state, 'token', store.get('token').token);
 };
 
 export default {

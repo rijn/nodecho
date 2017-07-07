@@ -2,6 +2,9 @@
     <footer>
         <ul>
             <li>
+                &copy; Rijn, 2017
+            </li>
+            <li>
                 <a>Homepage</a>
             </li>
             <li>
@@ -11,10 +14,10 @@
                 <a>CV</a>
             </li>
             <li>
-                <a>Github</a>
+                <a>GitHub</a>
             </li>
             <li class="right">
-                <logo dark width="50px"/>
+                <logo dark width="40px"/>
             </li>
         </ul>
     </footer>
@@ -41,6 +44,7 @@ export default {
 <style lang="less" scoped>
 ul {
     padding: 0.5rem;
+    font-size: 0.8rem;
 
     li {
         display: inline-block;
