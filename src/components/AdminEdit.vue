@@ -47,7 +47,7 @@ import Message from 'iview/src/components/message';
 import Button from './Button';
 import Input from 'iview/src/components/input';
 import Form from 'iview/src/components/form';
-import Switch from 'iview/src/components/Switch';
+import Switch from 'iview/src/components/switch';
 import { Row, Col } from 'iview/src/components/grid';
 
 var pick = (o, props) => {
