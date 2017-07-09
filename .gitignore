@@ -10,3 +10,4 @@ selenium-debug.log
 config/prod.conf.js
 dev.db
 tmp/
+files/

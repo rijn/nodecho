@@ -7,7 +7,6 @@ var expressValidator = require('express-validator');
 var _ = require('underscore');
 var multer = require('multer');
 var storage = multer.memoryStorage();
-var history = require('connect-history-api-fallback');
 var args = process.argv.slice(2);
 
 const app = express();
@@ -17,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(multer({
-    dest: path.join(__dirname, '../uploads'),
+    dest: path.join(__dirname, '../files'),
     limits: {
         fieldNameSize: 100,
         files: 1,
@@ -55,7 +54,9 @@ app.use(function (req, res, next) {
     }
 });
 
-// cast parameter
+app.use('/files', express.static(path.join(__dirname, '../files')));
+
+const history = require('connect-history-api-fallback');
 app.use(history({
     rewrites: [{
         from: /^[a-zA_Z0-9,/]*$/,
@@ -69,8 +70,6 @@ if (args.indexOf('--vue') > -1) {
 } else {
     app.use('/', express.static(path.join(__dirname, '../dist')));
 }
-
-app.use('/files', express.static(path.join(__dirname, '../files')));
 
 if (args.indexOf('--livereload') > -1) {
     console.log('Enabling Livereload Service...');

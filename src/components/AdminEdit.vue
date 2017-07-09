@@ -34,8 +34,16 @@
                 <form-item label="Summary">
                     <i-input v-model="form.summary" type="textarea" :autosize="{ minRows: 2, maxRows: 5 }"></i-input>
                 </form-item>
+                <form-item>
+                    <upload v-on:success="insertImage"></upload>
+                </form-item>
                 <form-item label="Content">
-                    <i-input v-model="form.content" type="textarea" :autosize="{ minRows: 20, maxRows: 50 }"></i-input>
+                    <i-input
+                        class="editor"
+                        v-model="form.content"
+                        type="textarea"
+                        :autosize="{ minRows: 20, maxRows: 50 }">
+                    </i-input>
                 </form-item>
             </i-form>
         </div>
@@ -50,6 +58,7 @@ import Input from 'iview/src/components/input';
 import Form from 'iview/src/components/form';
 import Switch from 'iview/src/components/switch';
 import { Row, Col } from 'iview/src/components/grid';
+import Upload from './Upload';
 
 var pick = (o, props) => {
     return Object.assign({}, ...props.map(prop => ({[prop]: o[prop]})));
@@ -75,7 +84,8 @@ export default {
         FormItem: Form.Item,
         iSwitch: Switch,
         Row,
-        iCol: Col
+        iCol: Col,
+        Upload
     },
 
     data () {
@@ -153,6 +163,9 @@ export default {
                         Message.error(err.body.error);
                     });
             }
+        },
+        insertImage (path) {
+            this.form.content = this.form.content + `![](${path})`;
         }
     },
 
@@ -171,6 +184,8 @@ export default {
 
     position: relative;
     display: block;
+}
+.toolbar {
 }
 </style>
 
