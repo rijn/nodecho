@@ -42,7 +42,7 @@ import Content from './Content';
 import Loading from './Loading';
 
 export default {
-    name: 'hello',
+    name: 'Hello',
 
     components: { iContent: Content, iButton: Button, Loading },
 
