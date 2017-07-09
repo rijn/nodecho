@@ -1,5 +1,8 @@
 <template>
-    <div class="post">
+    <div v-if="loading" style="overflow: hidden;">
+        <loading></loading>
+    </div>
+    <div class="post" v-else>
         <i-content
             v-if="post"
             :title="post.title"
@@ -19,11 +22,12 @@ import Content from './Content';
 import Message from 'iview/src/components/message';
 import store from 'store';
 import { mapGetters } from 'vuex';
+import Loading from './Loading';
 
 export default {
     name: 'hello',
 
-    components: { Auth, iContent: Content },
+    components: { Auth, iContent: Content, Loading },
 
     data () {
         return {
@@ -33,7 +37,8 @@ export default {
                 passwordRequired: false,
                 password: null
             },
-            message: null
+            message: null,
+            loading: true
         };
     },
 
@@ -47,16 +52,14 @@ export default {
     watch: {
         '$route': {
             deep: true,
-            handler (to, from) {
-                if (to.name !== 'Post') return;
-                this.fetch();
-            }
+            handler (to, from) { if (to.name === this.$options.name) this.fetch(); }
         }
     },
 
     methods: {
         fetch () {
             this.post = this.message = null;
+            this.loading = true;
             let password = store.get(this.$route.params.id) || { password: null };
             password = this.auth.password || password.password;
             this.$api.posts
@@ -68,10 +71,12 @@ export default {
                     this.isLogin ? this.token : {}
                 ))
                 .then(res => {
+                    this.loading = false;
                     this.post = res.body;
                     store.set(this.$route.params.id, { password });
                 })
                 .catch(err => {
+                    this.loading = false;
                     this.message = err.body.error;
                     if (err.status !== 401) {
                         Message.error(err.body.error);

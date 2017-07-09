@@ -1,6 +1,7 @@
 <template>
     <div class="hello">
         <div v-if="posts === null">
+            <loading></loading>
         </div>
         <div v-else>
             <template v-if="posts.length > 0">
@@ -38,11 +39,12 @@
 <script>
 import Button from './Button';
 import Content from './Content';
+import Loading from './Loading';
 
 export default {
     name: 'hello',
 
-    components: { iContent: Content, iButton: Button },
+    components: { iContent: Content, iButton: Button, Loading },
 
     data () {
         return {
@@ -58,12 +60,13 @@ export default {
     watch: {
         '$route': {
             deep: true,
-            handler: function (to) { this.assignQuery(to); }
+            handler: function (to) { if (to.name === this.$options.name) this.assignQuery(to); }
         }
     },
 
     methods: {
         fetch () {
+            this.posts = null;
             this.$api.posts
                 .get(this.query)
                 .then(res => {
