@@ -91,7 +91,7 @@ export default {
         isLogin () { this.verifyIsLogin(); },
         '$route': {
             deep: true,
-            handler (to) { console.log(to.name); if (to.name === 'AdminEdit') this.fetch(); }
+            handler (to) { if (to.name === this.$options.name) { this.fetch(); } }
         }
     },
 
@@ -114,7 +114,7 @@ export default {
                         Message.error(err.body.error);
                     });
             } else {
-                this.form = emptyFrom;
+                this.$nextTick(() => { this.form = Object.assign({}, emptyFrom); });
             }
         },
         submit () {
