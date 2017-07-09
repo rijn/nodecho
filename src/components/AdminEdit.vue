@@ -2,6 +2,7 @@
     <div>
         <div class="panel">
             <i-button @click="submit">Submit</i-button>
+            <i-button @click="remove">delete</i-button>
         </div>
         <div class="panel" v-if="form">
             <i-form :model="form" label-position="right" :label-width="100">
@@ -137,6 +138,21 @@ export default {
                 .catch(err => {
                     Message.error(err.body.error);
                 });
+        },
+        remove () {
+            if (this.$route.params.id === 'new') {
+                this.$router.back();
+            } else {
+                this.$api.posts
+                    .remove({ id: this.$route.params.id }, this.token)
+                    .then(res => {
+                        Message.success('Remove successfully');
+                        this.$router.push({ name: 'AdminPost' });
+                    })
+                    .catch(err => {
+                        Message.error(err.body.error);
+                    });
+            }
         }
     },
 
