@@ -2,7 +2,8 @@
     <div>
         <div class="panel">
             <i-button @click="submit">Submit</i-button>
-            <i-button @click="remove">delete</i-button>
+            <i-button @click="remove">{{ $route.params.id === 'new' ? 'cancel' : 'delete' }}</i-button>
+            <i-button @click="view" style="margin-left: 1rem;" :disabled="$route.params.id === 'new'">View</i-button>
         </div>
         <div class="panel" v-if="form">
             <i-form :model="form" label-position="right" :label-width="100">
@@ -151,7 +152,7 @@ export default {
         },
         remove () {
             if (this.$route.params.id === 'new') {
-                this.$router.back();
+                this.$router.push({ name: 'AdminPost' });
             } else {
                 this.$api.posts
                     .remove({ id: this.$route.params.id }, this.token)
@@ -166,6 +167,9 @@ export default {
         },
         insertImage (path) {
             this.form.content = this.form.content + `![](${path})`;
+        },
+        view () {
+            this.$router.push({ name: 'Post', params: this.$route.params });
         }
     },
 
