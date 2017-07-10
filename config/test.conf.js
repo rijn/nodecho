@@ -1,4 +1,6 @@
-var merge = require('lodash').merge;
+const path = require('path');
+const merge = require('lodash').merge;
+
 var devConf = require('./dev.conf');
 
 module.exports = merge(devConf, {
