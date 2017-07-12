@@ -11,6 +11,7 @@
                     :key="post.id"
                     :title="post.title"
                     :content="post.summary"
+                    :footer="false"
                     :to="{ name: 'Post', params: { id: post.id } }" />
             </template>
             <div v-else>

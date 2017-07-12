@@ -6,7 +6,8 @@
         <i-content
             v-if="post"
             :title="post.title"
-            :content="post.content" />
+            :content="post.content"
+            :info="post" />
         <template v-else>
             <div class="message" v-if="message">{{ message }}</div>
             <div class="auth">

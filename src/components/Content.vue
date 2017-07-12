@@ -12,9 +12,9 @@
         </header>
         <section class="content-excerpt content-markdown markdown" v-html="contentHtml">
         </section>
-        <footer class="content-meta" style="display:none">
-            <!--<%= data.tags.join(",") %>-->
-            <time class="content-date" datetime="<%= data.time %>"><%= new Date(Number(data.time)).toDateString() %></time></time>
+        <footer class="content-info pc-only" v-if="footer && info">
+            <!-- <time class="content-date" :datetime="info.created_at">{{ new Date(info.created_at).toDateString() }}</time> -->
+            <div class="content-location">{{ info.location }}</div>
         </footer>
     </article>
 </template>
@@ -28,7 +28,12 @@ export default {
     props: {
         title: String,
         content: String,
-        to: Object
+        to: Object,
+        info: Object,
+        footer: {
+            type: Boolean,
+            default: true
+        }
     },
 
     computed: {
@@ -75,35 +80,13 @@ export default {
             line-height: 1.65em;
         }
     }
+
+    .content-info {
+        display: block;
+        text-align: center;
+        font-size: 0.7em;
+    }
 }
-
-// .content-index{
-//     position: relative;
-//     width: 80%;
-//     max-width: 780px;
-//     padding: 4rem auto;
-//     word-break: break-word;
-//     hyphens: auto;
-// }
-
-// .content-meta {
-//     display: block;
-//     margin: 2rem 0 0.6rem 0;
-//     font-size: 1.5em;
-//     line-height: 2.2em;
-//     color: #9EABB3;
-// }
-
-// .content-date,
-// .content-views {
-//     display: inline-block;
-//     margin-left: 8px;
-//     padding-left: 12px;
-//     border-left: #d5dbde 1px solid;
-//     text-transform: uppercase;
-//     font-size: 1.3em;
-//     white-space: nowrap;
-// }
 </style>
 
 <style lang="less">
@@ -158,8 +141,8 @@ export default {
     border-left: solid 5px @text-color;
 
     @media screen and (max-width: 769px) {
-        margin-left: 0px;
-        margin-right: 1em;
+        margin-left: 0;
+        margin-right: 0;
         padding-left: 1em;
         border-left: solid 4px @text-color;
     }
@@ -169,6 +152,9 @@ export default {
     border: 0;
     border-top: solid 1px @text-color;
     margin: 2em 0;
+    @media screen and (max-width: 769px) {
+        margin: 1em 0;
+    }
 }
 
 .markdown code {
