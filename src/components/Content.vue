@@ -1,5 +1,5 @@
 <template>
-    <article class="content">
+    <article class="content" :class="{ poem: info && info.poem }">
         <header class="content-header">
             <h1 class="content-title">
                 <router-link class="content-title-link" v-if="to" :to="to">
@@ -10,7 +10,9 @@
                 </span>
             </h1>
         </header>
-        <section class="content-excerpt content-markdown markdown" v-html="contentHtml">
+        <section
+            class="content-excerpt content-markdown markdown"
+            v-html="contentHtml">
         </section>
         <footer class="content-info pc-only" v-if="footer && info">
             <!-- <time class="content-date" :datetime="info.created_at">{{ new Date(info.created_at).toDateString() }}</time> -->
@@ -37,7 +39,32 @@ export default {
     },
 
     computed: {
-        contentHtml: function () { return markdown.toHTML(this.content || ''); }
+        contentHtml: function () {
+            if (this.info && this.info.poem) {
+                return this.content.split(/\n/gi).map(line => line ? `<p>${line}</p>` : '<br/>').join('');
+            } else {
+                return markdown.toHTML(this.content || '');
+            }
+        }
+    },
+
+    methods: {
+        includeStyleElement (styles, styleId) {
+            var style = document.createElement('style');
+            style.id = styleId;
+            (document.getElementsByTagName('head')[0] || document.body).appendChild(style);
+            if (style.styleSheet) {
+                style.styleSheet.cssText = styles;
+            } else {
+                style.appendChild(document.createTextNode(styles));
+            }
+        }
+    },
+
+    mounted () {
+        if (this.info && this.info.poem) {
+            this.includeStyleElement(this.info.font, 'font');
+        }
     }
 };
 </script>
@@ -85,6 +112,24 @@ export default {
         display: block;
         text-align: center;
         font-size: 0.7em;
+    }
+}
+
+.poem {
+    font-family: 'poem-font' !important;
+    text-align: center;
+
+    header, section {
+        margin: 4rem auto !important;
+    }
+
+    .content-markdown {
+        line-height: 1.2em;
+        letter-spacing: 0.1em;
+    }
+
+    footer {
+        margin-top: 7rem;
     }
 }
 </style>

@@ -32,6 +32,14 @@
                         </form-item>
                     </i-col>
                 </row>
+                <row>
+                    <i-col span="12">
+                        <form-item label="Poem Style">
+                            <i-switch v-model="form.poem">
+                            </i-switch>
+                        </form-item>
+                    </i-col>
+                </row>
                 <form-item label="Summary">
                     <i-input v-model="form.summary" type="textarea" :autosize="{ minRows: 2, maxRows: 5 }"></i-input>
                 </form-item>
@@ -71,7 +79,8 @@ const emptyFrom = {
     private: true,
     summary: '',
     content: '',
-    location: ''
+    location: '',
+    poem: false
 };
 
 export default {
