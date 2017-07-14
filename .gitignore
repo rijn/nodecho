@@ -11,3 +11,4 @@ config/prod.conf.js
 dev.db
 tmp/
 files/
+font.ttf

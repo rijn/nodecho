@@ -5,6 +5,10 @@ const errorHandler = require('../../../utils/error-handler');
 const idt = require('../../../utils/idt');
 const authority = require('../../../utils/authority');
 
+const Fontmin = require('fontmin');
+const path = require('path');
+const fontPath = path.join(__dirname, '../../../../font.ttf');
+
 const schema = {
     'id': {
         notEmpty: true,
@@ -124,6 +128,31 @@ module.exports = (req, res) => {
                 .then(() => {
                     deferred.resolve(_s);
                 });
+            return deferred.promise;
+        })
+
+        .then(_s => {
+            let deferred = Q.defer();
+            if (_s.post.poem) {
+                new Fontmin()
+                    .src(fontPath)
+                    .use(Fontmin.glyph({
+                        text: _s.post.content
+                    }))
+                    .use(Fontmin.css({
+                        fontFamily: 'poem-font',
+                        base64: true
+                    }))
+                    .run((err, files) => {
+                        if (err) {
+                            console.error(err);
+                        }
+                        _s.post.font = files[1]._contents.toString();
+                        deferred.resolve(_s);
+                    });
+            } else {
+                deferred.resolve(_s);
+            }
             return deferred.promise;
         })
 

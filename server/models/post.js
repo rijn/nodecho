@@ -30,6 +30,12 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: true,
             _validate: { optional: true }
+        },
+        poem: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+            _validate: { optional: true }
         }
     }, {
         paranoid: true,
