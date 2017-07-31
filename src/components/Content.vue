@@ -113,6 +113,10 @@ export default {
         text-align: center;
         font-size: 0.7em;
     }
+
+    footer {
+        margin-top: 4rem;
+    }
 }
 
 .poem {
